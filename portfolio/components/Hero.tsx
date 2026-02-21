@@ -14,7 +14,7 @@ export default function Hero() {
       {/* Main heading */}
       <div className="mb-10 sm:mb-12">
         <h1 className="font-serif text-[clamp(3rem,12vw,9rem)] leading-[0.9] font-light text-ink animate-fade-up opacity-0 delay-100">
-          Yeonghwan
+          YeongHwan
           <br />
           <span className="italic">Shin</span>
           <span className="text-accent">.</span>
