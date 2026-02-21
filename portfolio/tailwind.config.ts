@@ -8,23 +8,31 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '400px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
+      colors: {
+        paper: '#F5F2EE',
+        ink: '#0F0F0E',
+        accent: '#B85C38',
+        muted: '#8A8680',
+        border: '#E0DDD9',
+      },
       fontFamily: {
         serif: ['Cormorant Garamond', 'Georgia', 'serif'],
         mono: ['IBM Plex Mono', 'monospace'],
         sans: ['DM Sans', 'sans-serif'],
       },
-      colors: {
-        ink: '#0F0F0E',
-        paper: '#F5F2EE',
-        muted: '#8A8580',
-        accent: '#B85C38',
-        border: '#DDD8D2',
-      },
       letterSpacing: {
-        widest2: '0.25em',
+        widest2: '0.2em',
       },
     },
   },
   plugins: [],
 }
+
 export default config

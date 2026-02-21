@@ -5,7 +5,6 @@ import Experience from '@/components/Experience'
 import Publications from '@/components/Publications'
 import Awards from '@/components/Awards'
 import Skills from '@/components/Skills'
-import Projects from '@/components/Projects'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -17,8 +16,6 @@ export default function Home() {
       <About />
       <hr className="section-rule" />
       <Experience />
-      <hr className="section-rule" />
-      <Projects />
       <hr className="section-rule" />
       <Publications />
       <hr className="section-rule" />
