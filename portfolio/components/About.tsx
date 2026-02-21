@@ -50,22 +50,7 @@ export default function About() {
             </ul>
           </div>
 
-          <div>
-            <span className="font-mono text-[10px] tracking-widest uppercase text-muted block mb-3">
-              Languages
-            </span>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="font-sans text-sm text-ink">Korean</span>
-                <span className="font-mono text-[10px] text-muted tracking-wider">Native</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="font-sans text-sm text-ink">English</span>
-                <span className="font-mono text-[10px] text-muted tracking-wider">
-                  Professional Working
-                </span>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
