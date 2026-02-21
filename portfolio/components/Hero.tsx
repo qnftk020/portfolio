@@ -21,18 +21,6 @@ export default function Hero() {
         </h1>
       </div>
 
-      {/* Research interest tags */}
-      <div className="flex flex-wrap gap-2 mb-10 animate-fade-up opacity-0 delay-200">
-        {researchInterests.map((interest) => (
-          <span
-            key={interest}
-            className="font-mono text-[11px] tracking-wide border border-border px-3 py-1.5 text-muted hover:border-accent hover:text-accent transition-colors duration-200 cursor-default"
-          >
-            {interest}
-          </span>
-        ))}
-      </div>
-
       {/* Bio + links */}
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between animate-fade-up opacity-0 delay-300">
         <div className="flex-1 max-w-xl">
