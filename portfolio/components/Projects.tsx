@@ -6,8 +6,10 @@ import { useState } from 'react'
 
 const topicColors: Record<string, string> = {
   'Mixed Reality': 'bg-gray-100 text-gray-600',
+  'Media Art': 'bg-violet-50 text-violet-600',
   'Mobility Design': 'bg-red-50 text-red-600',
   'LLM': 'bg-orange-50 text-orange-600',
+  'Multi-agent': 'bg-orange-50 text-orange-700',
   'User Experience': 'bg-yellow-50 text-yellow-700',
   'Ergonomics': 'bg-blue-50 text-blue-600',
   'CAE': 'bg-gray-100 text-gray-600',
@@ -17,6 +19,7 @@ const topicColors: Record<string, string> = {
   'Augmented Reality': 'bg-green-50 text-green-600',
   'Service Design': 'bg-green-50 text-green-700',
   'Hackathon': 'bg-gray-100 text-gray-600',
+  'Philosophy': 'bg-indigo-50 text-indigo-600',
 }
 
 export default function Projects() {
@@ -24,15 +27,15 @@ export default function Projects() {
   const selectedProject = projects.find(p => p.id === selected)
 
   return (
-    <section className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
+    <section id="projects" className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex items-baseline gap-4 mb-10 sm:mb-14">
         <span className="font-mono text-[10px] tracking-widest uppercase text-muted">04</span>
         <h2 className="font-serif text-2xl sm:text-3xl font-light text-ink">Projects</h2>
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      {/* Grid — 1 col mobile, 3 col desktop */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
         {projects.map((project) => (
           <button
             key={project.id}
@@ -83,7 +86,7 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Detail panel (expands below on click) */}
+      {/* Detail panel */}
       {selectedProject && (
         <div className="mt-5 border border-accent p-6 sm:p-8 animate-fade-up">
           <div className="flex items-start justify-between mb-4">
