@@ -1,83 +1,70 @@
-'use client'
-
-import { useState } from 'react'
 import Section from './Section'
-import { awards } from '@/lib/data'
-
-function groupAwardsByYear(items: typeof awards) {
-  const map: Record<string, typeof awards> = {}
-  for (const item of items) {
-    const y = item.year.slice(0, 4)
-    if (!map[y]) map[y] = []
-    map[y].push(item)
-  }
-  return Object.entries(map)
-    .map(([year, list]) => ({ year, list }))
-    .sort((a, b) => Number(b.year) - Number(a.year))
-}
-
-function YearAccordion({
-  year,
-  count,
-  defaultOpen,
-  children,
-}: {
-  year: string
-  count: number
-  defaultOpen: boolean
-  children: React.ReactNode
-}) {
-  const [open, setOpen] = useState(defaultOpen)
-  return (
-    <div className="border-b border-border last:border-b-0">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-4 group"
-        aria-expanded={open}
-      >
-        <div className="flex items-center gap-4">
-          <span className="font-serif text-2xl sm:text-3xl font-light text-ink group-hover:text-accent transition-colors">
-            {year}
-          </span>
-          <span className="font-mono text-xs text-muted">
-            {count} award{count > 1 ? 's' : ''}
-          </span>
-        </div>
-        <span className={`font-mono text-muted text-xl transition-transform duration-200 ${open ? 'rotate-45' : ''}`}>
-          +
-        </span>
-      </button>
-      {open && <div className="pb-4">{children}</div>}
-    </div>
-  )
-}
+import { awards, exhibitions } from '@/lib/data'
 
 export default function Awards() {
-  const grouped = groupAwardsByYear(awards)
-
   return (
     <Section id="awards" title="Awards &amp; Recognition" className="bg-paper">
-      <div className="max-w-2xl">
-        {grouped.map(({ year, list }, i) => (
-          <YearAccordion key={year} year={year} count={list.length} defaultOpen={i === 0}>
-            {list.map((award, j) => (
+      <div className="grid md:grid-cols-2 gap-12 md:gap-20">
+        {/* Awards list */}
+        <div>
+          <div className="space-y-0">
+            {awards.map((award, i) => (
               <div
-                key={j}
-                className="group flex items-start gap-4 sm:gap-6 py-3 border-b border-border/50 last:border-b-0"
+                key={i}
+                className="group flex items-start gap-5 py-4 border-b border-border last:border-b-0"
               >
-                <span className="font-mono text-[10px] text-muted tracking-wider mt-0.5 shrink-0 w-10">
-                  {award.year.slice(5)}
+                <span className="font-mono text-[10px] text-muted tracking-wider mt-0.5 shrink-0 w-16">
+                  {award.year}
                 </span>
                 <div>
-                  <span className="font-serif text-base sm:text-lg font-medium text-ink block leading-tight group-hover:text-accent transition-colors">
+                  <span className="font-serif text-lg font-medium text-ink block leading-tight group-hover:text-accent transition-colors">
                     {award.title}
                   </span>
-                  <span className="font-sans text-sm text-ink/55 mt-0.5 block">{award.event}</span>
+                  <span className="font-sans text-sm text-ink/55 mt-0.5 block">
+                    {award.event}
+                  </span>
                 </div>
               </div>
             ))}
-          </YearAccordion>
-        ))}
+          </div>
+        </div>
+
+        {/* Exhibitions */}
+        <div>
+          <span className="font-mono text-[10px] tracking-widest uppercase text-muted block mb-8">
+            Exhibitions
+          </span>
+          <div className="space-y-0">
+            {exhibitions.map((ex, i) => (
+              <div
+                key={i}
+                className="py-4 border-b border-border last:border-b-0"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <span className="font-serif text-base italic text-accent block">
+                      {ex.work}
+                    </span>
+                    <span className="font-sans text-sm text-ink/70 mt-0.5 block">
+                      {ex.venue}
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-muted shrink-0">{ex.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Notable stat */}
+          <div className="mt-12 p-6 border border-accent/20 bg-accent/5">
+            <div className="font-serif text-5xl font-light text-accent mb-2">
+              {awards.length}+
+            </div>
+            <div className="font-mono text-[10px] tracking-widest uppercase text-muted">
+              Awards &amp; Honors
+            </div>
+          </div>
+        </div>
       </div>
     </Section>
   )
