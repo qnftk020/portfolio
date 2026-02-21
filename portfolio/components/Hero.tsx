@@ -1,4 +1,4 @@
-import { profile, researchInterests, publicationsIntl, publicationsDomestic, awards } from '@/lib/data'
+import { profile, researchInterests } from '@/lib/data'
 
 const stats = [
   { label: 'Publications', value: publicationsIntl.length + publicationsDomestic.length },
