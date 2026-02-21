@@ -5,7 +5,7 @@ export const profile = {
   nickname: 'Simon',
   tagline: 'HCI Researcher',
   subTagline: 'AI Experience Design · Human-AI Interaction · BCI',
-  bio: "I'm a graduate of Hongik University. My primary research interests lie in AI-based experience design, Human-AI interaction, and emotion analysis using Brain-Computer Interface (BCI). I am passionate about exploring these cutting-edge intersections of technology and human experience. My aspiration is to become a UX researcher who creates innovative fields by bridging AI, humanities, and engineering.",
+  bio: "I hold a degree from Hongik University and am currently a researcher at Samsung Medical Center. My primary research focuses on AI-based experience design, with a specific emphasis on multi-agent interaction. Additionally, I specialize in human-robot interaction (HRI) for pediatric care. My current work involves designing products that facilitate meaningful interactions between humanoid robots and pediatric patients within the medical domain.",
   links: {
     linkedin: 'https://www.linkedin.com/in/yeonghwan-shin/',
     scholar: 'https://scholar.google.com/citations?user=QwVeldgAAAAJ&hl=ko',
@@ -22,7 +22,8 @@ export const education = [
 export const researchInterests = [
   'Children-Robot Interaction (CRI)',
   'Multi-agent',
-  'Human-AI Interaction',
+  'AI-based experience design',
+  'Griefbots'
 ]
 
 export const experiences = [
