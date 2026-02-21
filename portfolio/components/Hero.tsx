@@ -1,11 +1,5 @@
 import { profile, researchInterests } from '@/lib/data'
 
-const stats = [
-  { label: 'Publications', value: publicationsIntl.length + publicationsDomestic.length },
-  { label: 'Awards', value: awards.length },
-  { label: 'Research Areas', value: researchInterests.length },
-]
-
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col justify-end pb-12 sm:pb-16 pt-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
@@ -27,7 +21,7 @@ export default function Hero() {
         </h1>
       </div>
 
-      {/* Research interest tags — fills empty space on desktop */}
+      {/* Research interest tags */}
       <div className="flex flex-wrap gap-2 mb-10 animate-fade-up opacity-0 delay-200">
         {researchInterests.map((interest) => (
           <span
@@ -45,20 +39,6 @@ export default function Hero() {
           <p className="font-sans text-sm sm:text-base md:text-lg font-light leading-relaxed text-ink/80">
             {profile.bio}
           </p>
-
-          {/* Stats row — desktop only */}
-          <div className="hidden md:flex items-center gap-10 mt-8 pt-8 border-t border-border">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <span className="font-serif text-3xl font-light text-ink block leading-none">
-                  {s.value}
-                </span>
-                <span className="font-mono text-[10px] tracking-wider uppercase text-muted mt-1 block">
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Links */}
