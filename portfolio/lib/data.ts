@@ -303,4 +303,12 @@ export const projects = [
     cover: '',
     description: '',
   },
+  {
+    id: 'jumanji-ar',
+    title: 'Jumanji AR',
+    year: 2025,
+    topic: ['Augmented Reality', 'Game'],
+    cover: '',
+    description: 'An AR-based immersive game experience inspired by Jumanji.',
+  },
 ]
