@@ -189,18 +189,18 @@ export const awards = [
 export const skills = [
   {
     category: 'Spatial Computing',
-    items: ['VR/AR (HoloLens 2)', 'Body Tracking (Sony Mocopi, LEAP Motion)', 'Eye Gaze (Tobii Pro Spark)', 'Touch & Press (bHaptics Tactsuit x40)', 'EEG Device (Muse 2)'],
+    items: ['VR/AR (HoloLens 2)', 'Body Tracking (Sony Mocopi)', 'Eye Gaze (Tobii Pro Spark)', 'Touch & Press (bHaptics Tactsuit x40)'],
   },
   {
     category: 'Rapid Prototyping',
-    items: ['Unity (C#)', 'Figma', 'Bezi 3D', 'C++', 'Generative Design (Fusion, Siemens NX)', 'CAE (Adams, Fluent, Ansys Discovery)', 'iOS & Vision Pro (Swift)', 'Firmware Development (Arduino)'],
+    items: ['Figma', 'Bezi 3D', 'C++', 'Generative Design (Fusion, Siemens NX)', 'CAE (Adams, Fluent, Ansys Discovery)', 'Firmware Development (Arduino)'],
   },
   {
     category: 'Statistical Analysis',
-    items: ['R', 'scipy', 'Matlab', 'jamovi'],
+    items: ['Matlab', 'jamovi'],
   },
   {
-    category: 'Machine Learning',
-    items: ['OpenCV', 'PyTorch', 'PyCharm'],
+    category: 'Media Art',
+    items: ['Touchdesigner', 'Strudel REPL'],
   },
 ]
