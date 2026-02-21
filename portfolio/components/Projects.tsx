@@ -24,7 +24,7 @@ export default function Projects() {
   const selectedProject = projects.find(p => p.id === selected)
 
   return (
-    <section className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
+    <section id="projects" className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex items-baseline gap-4 mb-10 sm:mb-14">
         <span className="font-mono text-[10px] tracking-widest uppercase text-muted">04</span>
