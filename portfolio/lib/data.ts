@@ -19,6 +19,12 @@ export const education = [
   { period: '2022.09 – 2025.02', institution: 'Hongik University', degree: 'B.E. in Design Engineering (Double Major)' },
 ]
 
+export const researchInterests = [
+  'Children-Robot Interaction (CRI)',
+  'Multi-agent',
+  'Human-AI Interaction',
+]
+
 export const experiences = [
   {
     period: 'Mar. 2022 – Jun. 2022',
@@ -26,8 +32,8 @@ export const experiences = [
     org: 'CMML',
     location: 'Yonsei University',
     description: 'C++ Developer and Student Research',
-    link: null,
-    linkLabel: null,
+    link: 'https://sites.google.com/site/kwkanglab/home',
+    linkLabel: 'Visit Website',
   },
   {
     period: 'Apr. 2023 – Dec. 2023',
@@ -196,12 +202,4 @@ export const skills = [
     category: 'Machine Learning',
     items: ['OpenCV', 'PyTorch', 'PyCharm'],
   },
-]
-
-export const exhibitions = [
-  { work: 'Golden Capsule', venue: '2023 KSDS Young Designers Exhibition', date: 'Oct. 2023' },
-  { work: 'Golden Capsule', venue: 'Design Korea', date: 'Nov. 2023' },
-  { work: 'Golden Capsule', venue: 'Prototype for Humanity', date: 'Nov. 2023' },
-  { work: 'Golden Capsule', venue: 'Seoul Design Festival', date: 'Dec. 2023' },
-  { work: 'Golden Capsule', venue: 'Red Dot Design Museum', date: 'Apr. 2025' },
 ]
