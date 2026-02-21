@@ -1,8 +1,15 @@
-import { profile } from '@/lib/data'
+import { profile, researchInterests, publicationsIntl, publicationsDomestic, awards } from '@/lib/data'
+
+const stats = [
+  { label: 'Publications', value: publicationsIntl.length + publicationsDomestic.length },
+  { label: 'Awards', value: awards.length },
+  { label: 'Research Areas', value: researchInterests.length },
+]
 
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col justify-end pb-12 sm:pb-16 pt-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
+
       {/* Top label */}
       <div className="mb-6 sm:mb-8 animate-fade-in opacity-0">
         <span className="font-mono text-[11px] tracking-widest2 uppercase text-muted">
@@ -20,12 +27,38 @@ export default function Hero() {
         </h1>
       </div>
 
+      {/* Research interest tags — fills empty space on desktop */}
+      <div className="flex flex-wrap gap-2 mb-10 animate-fade-up opacity-0 delay-200">
+        {researchInterests.map((interest) => (
+          <span
+            key={interest}
+            className="font-mono text-[11px] tracking-wide border border-border px-3 py-1.5 text-muted hover:border-accent hover:text-accent transition-colors duration-200 cursor-default"
+          >
+            {interest}
+          </span>
+        ))}
+      </div>
+
       {/* Bio + links */}
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between animate-fade-up opacity-0 delay-300">
-        <div className="max-w-lg">
+        <div className="flex-1 max-w-xl">
           <p className="font-sans text-sm sm:text-base md:text-lg font-light leading-relaxed text-ink/80">
             {profile.bio}
           </p>
+
+          {/* Stats row — desktop only */}
+          <div className="hidden md:flex items-center gap-10 mt-8 pt-8 border-t border-border">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <span className="font-serif text-3xl font-light text-ink block leading-none">
+                  {s.value}
+                </span>
+                <span className="font-mono text-[10px] tracking-wider uppercase text-muted mt-1 block">
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Links */}
