@@ -3,8 +3,8 @@
 export const profile = {
   name: 'Yeonghwan Shin',
   nickname: 'Simon',
-  tagline: 'HCI Researcher',
-  subTagline: 'AI Experience Design · Human-AI Interaction · BCI',
+  tagline: 'Digital Health Researcher',
+  subTagline: 'AI-based Experience Design · Multi-agent · Child-Robot Interaction(CRI)',
   bio: "I hold a degree from Hongik University and am currently a researcher at Samsung Medical Center. My primary research focuses on AI-based experience design, with a specific emphasis on multi-agent interaction. Additionally, I specialize in human-robot interaction (HRI) for pediatric care. My current work involves designing products that facilitate meaningful interactions between humanoid robots and pediatric patients within the medical domain.",
   links: {
     linkedin: 'https://www.linkedin.com/in/yeonghwan-shin/',
@@ -22,8 +22,8 @@ export const education = [
 export const researchInterests = [
   'Children-Robot Interaction (CRI)',
   'Multi-agent',
-  'AI-based experience design',
-  'Griefbots'
+  'AI-based Experience Design',
+  'Digital After Life'
 ]
 
 export const experiences = [
@@ -41,7 +41,7 @@ export const experiences = [
     role: 'Undergraduate Researcher',
     org: 'MiMi Lab',
     location: 'Hongik University',
-    description: "Autonomous Vehicle's External Interface Design Research (Prof. Dokshin Lim). Roblox Developer and Experiment Designer.",
+    description: "Autonomous Vehicle's External Interface Design Research (Prof. Ph.D Dokshin Lim).",
     link: null,
     linkLabel: null,
   },
@@ -50,7 +50,7 @@ export const experiences = [
     role: 'Research Intern',
     org: 'SNUH MEdiSC',
     location: 'South Korea',
-    description: 'Breathing Assistance System using Haptic Device (Prof. Hyoun Joong Kong). VR Developer.',
+    description: 'Breathing Assistance System using Haptic Device (Prof. Ph.D Hyoun Joong Kong)',
     link: 'https://medisc.org/',
     linkLabel: 'Visit Website',
   },
@@ -68,7 +68,7 @@ export const experiences = [
     role: 'Content Researcher',
     org: 'HI LAB, Samsung Medical Center',
     location: 'South Korea',
-    description: 'Medical Education with Child Robot Interaction (Prof. Meong Hi Son). Service Design, Project Management, LLM Modeling, Experiment Design.',
+    description: 'Medical Education with Child Robot Interaction (Prof. MD-Ph.D Meong Hi Son). Service Design, Project Management, LLM Modeling, Experiment Design.',
     link: null,
     linkLabel: null,
     current: true,
