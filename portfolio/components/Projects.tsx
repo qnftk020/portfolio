@@ -20,6 +20,7 @@ const topicColors: Record<string, string> = {
   'Service Design':     'bg-green-50 text-green-700',
   'Hackathon':          'bg-gray-100 text-gray-600',
   'Philosophy':         'bg-indigo-50 text-indigo-600',
+  'Virtual Reality': 'bg-cyan-50 text-cyan-600',
 }
 
 const statusStyle: Record<string, { dot: string; label: string; badge: string }> = {
@@ -84,7 +85,7 @@ export default function Projects() {
       </h2>
 
       {/* Featured Projects */}
-      <div className="mb-4 sm:mb-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           Featured
         </span>
