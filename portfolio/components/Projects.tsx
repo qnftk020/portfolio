@@ -23,9 +23,9 @@ const topicColors: Record<string, string> = {
 }
 
 const statusStyle: Record<string, { dot: string; label: string; badge: string }> = {
-  'Done':        { dot: 'bg-ink/30',              label: 'Done',        badge: 'bg-ink/5 text-ink/40' },
-  'In-progress': { dot: 'bg-accent animate-pulse', label: 'In Progress', badge: 'bg-accent/10 text-accent' },
-  'Not started': { dot: 'bg-muted/40',             label: 'Not Started', badge: 'bg-muted/10 text-muted' },
+  'Done':        { dot: 'bg-[#4DAB9A]',               label: 'Done',        badge: 'bg-[#EDFAF5] text-[#4DAB9A]' },
+  'In-progress': { dot: 'bg-[#4F93D0] animate-pulse', label: 'In Progress', badge: 'bg-[#EDF4FB] text-[#4F93D0]' },
+  'Not started': { dot: 'bg-[#9B9B9B]',               label: 'Not Started', badge: 'bg-[#F5F5F5] text-[#9B9B9B]' },
 }
 
 const FEATURED_IDS = ['golden-capsule', 'sophybara', 'minwon99', 'hyper-last-will']
@@ -88,7 +88,7 @@ export default function Projects() {
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           Featured
         </span>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 gap-4 sm:gap-5">
           {featured.map(p => (
             <ProjectCard key={p.id} project={p} />
           ))}
