@@ -296,4 +296,14 @@ export const projects = [
     cover: '',
     description: '',
   },
+  {
+    id: 'hyper-last-will',
+    title: 'Hyper Last Will',
+    year: 2026,
+    topic: ['Media Art'],
+    status: 'Not started' as const,
+    cover: null,
+    summary: '',
+    description: '',
+  },
 ]
