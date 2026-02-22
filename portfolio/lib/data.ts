@@ -300,7 +300,7 @@ export const projects = [
     id: 'hyper-last-will',
     title: 'Hyper Last Will',
     year: 2026,
-    topic: ['Media Art'],
+    topic: ['Media Art', 'Virtual Reality'],
     status: 'Not started' as const,
     cover: null,
     summary: '',
