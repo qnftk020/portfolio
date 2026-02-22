@@ -28,16 +28,16 @@ const statusStyle: Record<string, { dot: string; label: string; badge: string }>
   'Not started': { dot: 'bg-muted/40',             label: 'Not Started', badge: 'bg-muted/10 text-muted' },
 }
 
-const FEATURED_IDS = ['golden-capsule', 'sophybara', 'minwon99']
+const FEATURED_IDS = ['golden-capsule', 'sophybara', 'minwon99', 'hyper-last-will']
 
-function ProjectCard({ project, featured = false }: { project: typeof projects[number]; featured?: boolean }) {
+function ProjectCard({ project }: { project: typeof projects[number] }) {
   const st = statusStyle[project.status] ?? statusStyle['Done']
   return (
     <Link
       href={`/projects/${project.id}`}
       className="group text-left border border-border hover:border-ink/30 transition-all duration-200 block"
     >
-      <div className={`${featured ? 'aspect-video' : 'aspect-square'} w-full bg-[#EDEBE7] overflow-hidden relative`}>
+      <div className="aspect-square w-full bg-[#EDEBE7] overflow-hidden relative">
         {project.cover ? (
           <Image
             src={project.cover}
@@ -88,9 +88,9 @@ export default function Projects() {
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           Featured
         </span>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {featured.map(p => (
-            <ProjectCard key={p.id} project={p} featured />
+            <ProjectCard key={p.id} project={p} />
           ))}
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function Projects() {
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           All
         </span>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {rest.map(p => (
             <ProjectCard key={p.id} project={p} />
           ))}
