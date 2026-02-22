@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --paper: #F5F2EE;
+    --ink: #0F0F0E;
+    --accent: #B85C38;
+    --muted: #8A8680;
+    --border: #E0DDD9;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent horizontal overflow on mobile */
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Better touch targets on mobile */
+  a, button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Restore inline anchors */
+  a.hover-underline {
+    min-height: unset;
+    display: inline;
+  }
+}
+
+@layer components {
+  .font-serif  { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .font-mono   { font-family: 'IBM Plex Mono', monospace; }
+  .font-sans   { font-family: 'DM Sans', sans-serif; }
+
+  .bg-paper { background-color: var(--paper); }
+  .bg-ink   { background-color: var(--ink); }
+  .text-ink { color: var(--ink); }
+  .text-accent { color: var(--accent); }
+  .text-muted  { color: var(--muted); }
+  .border-border { border-color: var(--border); }
+  .bg-accent { background-color: var(--accent); }
+  .border-accent { border-color: var(--accent); }
+
+  .hover-underline {
+    position: relative;
+    padding-bottom: 1px;
+  }
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+  .hover-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-700 { animation-delay: 0.7s; }
+}
+
+/* Mobile: ensure images and embeds don't overflow */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
