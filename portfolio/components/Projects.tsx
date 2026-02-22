@@ -37,7 +37,6 @@ function ProjectCard({ project, featured = false }: { project: typeof projects[n
       href={`/projects/${project.id}`}
       className="group text-left border border-border hover:border-ink/30 transition-all duration-200 block"
     >
-      {/* 이미지 — featured는 16:9, 일반은 1:1 */}
       <div className={`${featured ? 'aspect-video' : 'aspect-square'} w-full bg-[#EDEBE7] overflow-hidden relative`}>
         {project.cover ? (
           <Image
@@ -53,7 +52,6 @@ function ProjectCard({ project, featured = false }: { project: typeof projects[n
         )}
       </div>
 
-      {/* Card body */}
       <div className="p-4">
         <div className="flex flex-wrap items-center gap-1 mb-2">
           <span className={`inline-flex items-center gap-1 font-mono text-[9px] tracking-wide px-1.5 py-0.5 ${st.badge}`}>
@@ -87,7 +85,7 @@ export default function Projects() {
 
       {/* Featured Projects */}
       <div className="mb-4 sm:mb-5">
-        <span className="font-mono text-[10px] tracking-widest uppercase text-muted block mb-4">
+        <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           Featured
         </span>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -102,11 +100,11 @@ export default function Projects() {
 
       {/* All Projects */}
       <div>
-        <span className="font-mono text-[10px] tracking-widest uppercase text-muted block mb-4">
+        <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           All
         </span>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
-          {projects.map(p => (
+          {rest.map(p => (
             <ProjectCard key={p.id} project={p} />
           ))}
         </div>
