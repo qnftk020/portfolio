@@ -29,7 +29,7 @@ const statusStyle: Record<string, { dot: string; label: string; badge: string }>
   'Not started': { dot: 'bg-[#9B9B9B]',               label: 'Not Started', badge: 'bg-[#F5F5F5] text-[#9B9B9B]' },
 }
 
-const FEATURED_IDS = ['golden-capsule', 'sophybara', 'minwon99', 'hyper-last-will']
+const FEATURED_IDS = ['hyper-last-will', 'sophybara', 'minwon99', 'golden-capsule']
 
 function ProjectCard({ project }: { project: typeof projects[number] }) {
   const st = statusStyle[project.status] ?? statusStyle['Done']
@@ -76,7 +76,9 @@ function ProjectCard({ project }: { project: typeof projects[number] }) {
 
 export default function Projects() {
   const featured = FEATURED_IDS.map(id => projects.find(p => p.id === id)!).filter(Boolean)
-  const rest = projects.filter(p => !FEATURED_IDS.includes(p.id))
+  const rest = projects
+    .filter(p => !FEATURED_IDS.includes(p.id))
+    .sort((a, b) => Number(b.year) - Number(a.year))
 
   return (
     <section id="projects" className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
