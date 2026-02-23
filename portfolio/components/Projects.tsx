@@ -1,4 +1,4 @@
-import { getProjects, Project } from '@/lib/supabase'
+import projects, { featuredProjects, allProjects, Project } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -32,8 +32,8 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projects/${project.slug}`} className="group text-left border border-border hover:border-ink/30 transition-all duration-200 block">
       <div className="aspect-square w-full bg-[#EDEBE7] overflow-hidden relative">
-        {project.cover_url ? (
-          <Image src={project.cover_url} alt={project.title} fill className="object-cover group-hover:scale-[1.02] transition-transform duration-300" unoptimized />
+        {project.coverUrl ? (
+          <Image src={project.coverUrl} alt={project.title} fill className="object-cover group-hover:scale-[1.02] transition-transform duration-300" unoptimized />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <span className="font-mono text-[10px] tracking-widest text-muted uppercase">No image</span>
@@ -57,25 +57,21 @@ function ProjectCard({ project }: { project: Project }) {
   )
 }
 
-export default async function Projects() {
-  const all = await getProjects()
-  const featured = all.filter(p => p.featured)
-  const rest = all.filter(p => !p.featured)
-
+export default function Projects() {
   return (
     <section id="projects" className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
       <h2 className="font-serif text-2xl sm:text-3xl font-light text-ink mb-10 sm:mb-14">Projects</h2>
       <div className="mb-4 sm:mb-5">
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">Featured</span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {featured.map(p => <ProjectCard key={p.id} project={p} />)}
+          {featuredProjects.map(p => <ProjectCard key={p.slug} project={p} />)}
         </div>
       </div>
       <hr className="border-border my-8 sm:my-10" />
       <div>
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">All</span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {rest.map(p => <ProjectCard key={p.id} project={p} />)}
+          {allProjects.map(p => <ProjectCard key={p.slug} project={p} />)}
         </div>
       </div>
     </section>
