@@ -1,23 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { checkPassword } from '@/lib/auth'
+import { NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const { password } = await req.json()
-  if (!checkPassword(password)) {
-    return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
+  if (password === process.env.ADMIN_PASSWORD) {
+    return NextResponse.json({ ok: true })
   }
-  const res = NextResponse.json({ ok: true })
-  res.cookies.set('admin_auth', 'true', {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-  })
-  return res
-}
-
-export async function DELETE() {
-  const res = NextResponse.json({ ok: true })
-  res.cookies.delete('admin_auth')
-  return res
+  return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 }
