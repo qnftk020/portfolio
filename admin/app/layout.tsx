@@ -1,5 +1,12 @@
 import './globals.css'
-export const metadata = { title: 'Portfolio Admin' }
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = { title: 'Portfolio Admin' }
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body className="bg-gray-50 min-h-screen">{children}</body></html>
+  return (
+    <html lang="en">
+      <body className="bg-gray-50 min-h-screen">{children}</body>
+    </html>
+  )
 }
