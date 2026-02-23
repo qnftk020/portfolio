@@ -23,19 +23,32 @@ export type NotionBlock =
   | { type: 'image'; url: string; caption: string }
   | { type: 'video'; url: string; caption: string }
 
-async function notionFetch(endpoint: string, body?: object) {
-  const res = await fetch(`https://api.notion.com/v1${endpoint}`, {
-    method: body ? 'POST' : 'GET',
-    headers: {
-      Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
-      'Notion-Version': '2022-06-28',
-      'Content-Type': 'application/json',
-    },
-    body: body ? JSON.stringify(body) : undefined,
-    cache: 'no-store',
-  })
-  if (!res.ok) throw new Error(`Notion API error: ${res.status}`)
-  return res.json()
+async function notionFetch(endpoint: string, body?: object): Promise<any> {
+  const token = process.env.NOTION_TOKEN
+  if (!token) {
+    console.warn('[Notion] NOTION_TOKEN not set')
+    return { results: [] }
+  }
+  try {
+    const res = await fetch(`https://api.notion.com/v1${endpoint}`, {
+      method: body ? 'POST' : 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+      body: body ? JSON.stringify(body) : undefined,
+      cache: 'no-store',
+    })
+    if (!res.ok) {
+      console.error(`[Notion] API error ${res.status} at ${endpoint}`)
+      return { results: [] }
+    }
+    return res.json()
+  } catch (e) {
+    console.error('[Notion] fetch failed', e)
+    return { results: [] }
+  }
 }
 
 function extractText(richText: any[]): string {
@@ -67,8 +80,7 @@ function parseProject(page: any): NotionProject {
 async function getPageBlocks(pageId: string): Promise<NotionBlock[]> {
   const data = await notionFetch(`/blocks/${pageId}/children`)
   const blocks: NotionBlock[] = []
-
-  for (const block of data.results) {
+  for (const block of data.results ?? []) {
     const type = block.type
     if (type === 'paragraph') {
       const text = extractText(block.paragraph.rich_text)
@@ -98,14 +110,14 @@ export async function getProjects(): Promise<NotionProject[]> {
   const data = await notionFetch(`/databases/${DATABASE_ID}/query`, {
     sorts: [{ property: 'Year', direction: 'descending' }],
   })
-  return data.results.map(parseProject)
+  return (data.results ?? []).map(parseProject)
 }
 
 export async function getProjectBySlug(slug: string): Promise<NotionProject | null> {
   const data = await notionFetch(`/databases/${DATABASE_ID}/query`, {
     filter: { property: 'Slug', rich_text: { equals: slug } },
   })
-  if (!data.results.length) return null
+  if (!data.results?.length) return null
   const project = parseProject(data.results[0])
   project.blocks = await getPageBlocks(data.results[0].id)
   return project
