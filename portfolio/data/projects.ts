@@ -5,7 +5,7 @@
 export type ProjectStatus = 'Done' | 'In-progress' | 'Not started'
 
 export interface Project {
-  slug: string
+  slug: string          // URL에 사용되는 ID (영문 소문자, 하이픈)
   title: string
   year: number
   status: ProjectStatus
@@ -13,7 +13,7 @@ export interface Project {
   summary: string
   coverUrl: string | null  // 이미지 URL 또는 /images/파일명.jpg
   featured: boolean
-  content: ContentBlock[]  // 프로젝트 상세 페이지 내용
+  content: ContentBlock[]
 }
 
 export type ContentBlock =
@@ -22,7 +22,8 @@ export type ContentBlock =
   | { type: 'video'; url: string; caption?: string }
 
 const projects: Project[] = [
-  // ─── FEATURED ───────────────────────────────────────────
+
+  // ─── FEATURED ─────────────────────────────────────────────
   {
     slug: 'hyper-last-will',
     title: 'Hyper Last Will',
@@ -63,7 +64,7 @@ const projects: Project[] = [
     ],
   },
   {
-    slug: 'minwon99',
+    slug: 'minwon-99',
     title: 'Minwon 99',
     year: 2024,
     status: 'Done',
@@ -76,14 +77,27 @@ const projects: Project[] = [
     ],
   },
 
-  // ─── ALL ────────────────────────────────────────────────
+  // ─── ALL ──────────────────────────────────────────────────
   {
     slug: 'paw-pulse',
-    title: 'PawPulse',
+    title: 'Paw Pulse',
     year: 2025,
     status: 'Done',
     topic: ['User Experience', 'Product Design'],
     summary: 'Pet health monitoring app',
+    coverUrl: null,
+    featured: false,
+    content: [
+      { type: 'text', text: 'Description coming soon.' },
+    ],
+  },
+  {
+    slug: 'jumanji-ar',
+    title: 'Jumanji AR',
+    year: 2025,
+    status: 'Done',
+    topic: ['Augmented Reality', 'Game'],
+    summary: 'AR-enhanced Jumanji board game experience',
     coverUrl: null,
     featured: false,
     content: [
