@@ -32,7 +32,7 @@ async function notionFetch(endpoint: string, body?: object) {
       'Content-Type': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
-    next: { revalidate: 60 },
+    cache: 'no-store',
   })
   if (!res.ok) throw new Error(`Notion API error: ${res.status}`)
   return res.json()
