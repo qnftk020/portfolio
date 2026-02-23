@@ -1,4 +1,4 @@
-import { getProjects, NotionProject } from '@/lib/notion'
+import { getProjects, Project } from '@/lib/supabase'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -27,14 +27,13 @@ const statusStyle: Record<string, { dot: string; label: string; badge: string }>
   'Not started': { dot: 'bg-[#9B9B9B]',               label: 'Not Started', badge: 'bg-[#F5F5F5] text-[#9B9B9B]' },
 }
 
-function ProjectCard({ project }: { project: NotionProject }) {
+function ProjectCard({ project }: { project: Project }) {
   const st = statusStyle[project.status] ?? statusStyle['Done']
-  const href = `/projects/${project.slug || project.id}`
   return (
-    <Link href={href} className="group text-left border border-border hover:border-ink/30 transition-all duration-200 block">
+    <Link href={`/projects/${project.slug}`} className="group text-left border border-border hover:border-ink/30 transition-all duration-200 block">
       <div className="aspect-square w-full bg-[#EDEBE7] overflow-hidden relative">
-        {project.cover ? (
-          <Image src={project.cover} alt={project.title} fill className="object-cover group-hover:scale-[1.02] transition-transform duration-300" unoptimized />
+        {project.cover_url ? (
+          <Image src={project.cover_url} alt={project.title} fill className="object-cover group-hover:scale-[1.02] transition-transform duration-300" unoptimized />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <span className="font-mono text-[10px] tracking-widest text-muted uppercase">No image</span>
@@ -47,7 +46,7 @@ function ProjectCard({ project }: { project: NotionProject }) {
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${st.dot}`} />
             {st.label}
           </span>
-          {project.topic.map(t => (
+          {(project.topic ?? []).map(t => (
             <span key={t} className={`font-mono text-[9px] tracking-wide px-1.5 py-0.5 ${topicColors[t] ?? 'bg-gray-100 text-gray-500'}`}>{t}</span>
           ))}
         </div>
@@ -66,16 +65,13 @@ export default async function Projects() {
   return (
     <section id="projects" className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
       <h2 className="font-serif text-2xl sm:text-3xl font-light text-ink mb-10 sm:mb-14">Projects</h2>
-
       <div className="mb-4 sm:mb-5">
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">Featured</span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {featured.map(p => <ProjectCard key={p.id} project={p} />)}
         </div>
       </div>
-
       <hr className="border-border my-8 sm:my-10" />
-
       <div>
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">All</span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
