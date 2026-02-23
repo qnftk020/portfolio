@@ -1,6 +1,3 @@
-// Notion CMS - Portfolio Projects
-// Database ID: ad8f4454df954a6da5d68f1cc5a24fd0
-
 const DATABASE_ID = 'ad8f4454df954a6da5d68f1cc5a24fd0'
 
 export type ProjectStatus = 'Done' | 'In-progress' | 'Not started'
@@ -13,10 +10,18 @@ export interface NotionProject {
   status: ProjectStatus
   topic: string[]
   summary: string
-  description: string
   cover: string | null
   featured: boolean
+  blocks: NotionBlock[]
 }
+
+export type NotionBlock =
+  | { type: 'paragraph'; text: string }
+  | { type: 'heading_1'; text: string }
+  | { type: 'heading_2'; text: string }
+  | { type: 'heading_3'; text: string }
+  | { type: 'image'; url: string; caption: string }
+  | { type: 'video'; url: string; caption: string }
 
 async function notionFetch(endpoint: string, body?: object) {
   const res = await fetch(`https://api.notion.com/v1${endpoint}`, {
@@ -27,7 +32,7 @@ async function notionFetch(endpoint: string, body?: object) {
       'Content-Type': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
-    next: { revalidate: 60 }, // ISR: 60초마다 갱신
+    next: { revalidate: 60 },
   })
   if (!res.ok) throw new Error(`Notion API error: ${res.status}`)
   return res.json()
@@ -39,14 +44,12 @@ function extractText(richText: any[]): string {
 
 function parseProject(page: any): NotionProject {
   const props = page.properties
-
   const coverFiles = props.Cover?.files ?? []
   let cover: string | null = null
   if (coverFiles.length > 0) {
-    const file = coverFiles[0]
-    cover = file.type === 'external' ? file.external.url : file.file?.url ?? null
+    const f = coverFiles[0]
+    cover = f.type === 'external' ? f.external.url : f.file?.url ?? null
   }
-
   return {
     id: page.id,
     slug: extractText(props.Slug?.rich_text ?? []),
@@ -55,30 +58,57 @@ function parseProject(page: any): NotionProject {
     status: (props.Status?.select?.name ?? 'Done') as ProjectStatus,
     topic: props.Topic?.multi_select?.map((t: any) => t.name) ?? [],
     summary: extractText(props.Summary?.rich_text ?? []),
-    description: extractText(props.Description?.rich_text ?? []),
     cover,
     featured: props.Featured?.checkbox ?? false,
+    blocks: [],
   }
+}
+
+async function getPageBlocks(pageId: string): Promise<NotionBlock[]> {
+  const data = await notionFetch(`/blocks/${pageId}/children`)
+  const blocks: NotionBlock[] = []
+
+  for (const block of data.results) {
+    const type = block.type
+    if (type === 'paragraph') {
+      const text = extractText(block.paragraph.rich_text)
+      if (text) blocks.push({ type: 'paragraph', text })
+    } else if (type === 'heading_1') {
+      blocks.push({ type: 'heading_1', text: extractText(block.heading_1.rich_text) })
+    } else if (type === 'heading_2') {
+      blocks.push({ type: 'heading_2', text: extractText(block.heading_2.rich_text) })
+    } else if (type === 'heading_3') {
+      blocks.push({ type: 'heading_3', text: extractText(block.heading_3.rich_text) })
+    } else if (type === 'image') {
+      const img = block.image
+      const url = img.type === 'external' ? img.external.url : img.file?.url ?? ''
+      const caption = extractText(img.caption ?? [])
+      if (url) blocks.push({ type: 'image', url, caption })
+    } else if (type === 'video') {
+      const vid = block.video
+      const url = vid.type === 'external' ? vid.external.url : vid.file?.url ?? ''
+      const caption = extractText(vid.caption ?? [])
+      if (url) blocks.push({ type: 'video', url, caption })
+    }
+  }
+  return blocks
 }
 
 export async function getProjects(): Promise<NotionProject[]> {
   const data = await notionFetch(`/databases/${DATABASE_ID}/query`, {
     sorts: [{ property: 'Year', direction: 'descending' }],
   })
-
   return data.results.map(parseProject)
 }
 
 export async function getProjectBySlug(slug: string): Promise<NotionProject | null> {
   const data = await notionFetch(`/databases/${DATABASE_ID}/query`, {
-    filter: {
-      property: 'Slug',
-      rich_text: { equals: slug },
-    },
+    filter: { property: 'Slug', rich_text: { equals: slug } },
   })
-
   if (!data.results.length) return null
-  return parseProject(data.results[0])
+  const project = parseProject(data.results[0])
+  project.blocks = await getPageBlocks(data.results[0].id)
+  return project
 }
 
 export async function getAllSlugs(): Promise<string[]> {
