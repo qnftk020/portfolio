@@ -1,10 +1,10 @@
-import { projects } from '@/lib/data'
+import { projects, ContentBlock } from '@/lib/data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ id: p.id }))
+  return projects.map(p => ({ id: p.id }))
 }
 
 const topicColors: Record<string, string> = {
@@ -23,23 +23,64 @@ const topicColors: Record<string, string> = {
   'Service Design':     'bg-green-50 text-green-700',
   'Hackathon':          'bg-gray-100 text-gray-600',
   'Philosophy':         'bg-indigo-50 text-indigo-600',
+  'Virtual Reality':    'bg-cyan-50 text-cyan-600',
 }
 
 const statusStyle: Record<string, { dot: string; label: string; badge: string }> = {
-  'Done':        { dot: 'bg-ink/30',   label: 'Done',        badge: 'bg-ink/5 text-ink/40' },
-  'In-progress': { dot: 'bg-accent',   label: 'In Progress', badge: 'bg-accent/10 text-accent' },
-  'Not started': { dot: 'bg-muted/40', label: 'Not Started', badge: 'bg-muted/10 text-muted' },
+  'Done':        { dot: 'bg-[#4DAB9A]',               label: 'Done',        badge: 'bg-[#EDFAF5] text-[#4DAB9A]' },
+  'In-progress': { dot: 'bg-[#4F93D0] animate-pulse', label: 'In Progress', badge: 'bg-[#EDF4FB] text-[#4F93D0]' },
+  'Not started': { dot: 'bg-[#9B9B9B]',               label: 'Not Started', badge: 'bg-[#F5F5F5] text-[#9B9B9B]' },
+}
+
+function Block({ block }: { block: ContentBlock }) {
+  if (block.type === 'text') {
+    return (
+      <p className="font-sans text-base sm:text-lg text-ink/80 leading-relaxed whitespace-pre-wrap">
+        {block.value}
+      </p>
+    )
+  }
+  if (block.type === 'image') {
+    return (
+      <figure className="w-full">
+        <div className="relative w-full aspect-video bg-[#EDEBE7] overflow-hidden">
+          <Image src={block.src} alt={block.caption ?? ''} fill className="object-cover" />
+        </div>
+        {block.caption && (
+          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">
+            {block.caption}
+          </figcaption>
+        )}
+      </figure>
+    )
+  }
+  if (block.type === 'video') {
+    return (
+      <figure className="w-full">
+        <video
+          src={block.src}
+          controls
+          className="w-full aspect-video bg-black"
+        />
+        {block.caption && (
+          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">
+            {block.caption}
+          </figcaption>
+        )}
+      </figure>
+    )
+  }
+  return null
 }
 
 export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id)
+  const project = projects.find(p => p.id === params.id)
   if (!project) notFound()
 
   const st = statusStyle[project.status] ?? statusStyle['Done']
 
   return (
     <main className="min-h-screen bg-paper text-ink">
-      {/* 상단 네비 */}
       <div className="px-5 sm:px-8 md:px-12 py-6 border-b border-border">
         <Link
           href="/#projects"
@@ -50,63 +91,52 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         </Link>
       </div>
 
-      {/* 본문 */}
       <div className="max-w-4xl mx-auto px-5 sm:px-8 md:px-12 py-16 sm:py-24">
 
-        {/* Status + 키워드 태그 */}
+        {/* Status + Tags */}
         <div className="flex flex-wrap items-center gap-2 mb-6">
           <span className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wide px-2 py-1 ${st.badge}`}>
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${st.dot}`} />
             {st.label}
           </span>
           {project.topic.map(t => (
-            <span
-              key={t}
-              className={`font-mono text-[10px] tracking-wide px-2 py-1 ${topicColors[t] ?? 'bg-gray-100 text-gray-500'}`}
-            >
+            <span key={t} className={`font-mono text-[10px] tracking-wide px-2 py-1 ${topicColors[t] ?? 'bg-gray-100 text-gray-500'}`}>
               {t}
             </span>
           ))}
         </div>
 
-        {/* 제목 */}
+        {/* Title */}
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ink leading-tight mb-3">
           {project.title}
         </h1>
 
-        {/* 연도 */}
+        {/* Year */}
         <p className="font-mono text-xs text-muted mb-12">{project.year}</p>
 
-        {/* 이미지 */}
-        <div className="aspect-video w-full bg-[#EDEBE7] overflow-hidden relative mb-12">
+        {/* Cover */}
+        <div className="aspect-video w-full bg-[#EDEBE7] overflow-hidden relative mb-16">
           {project.cover ? (
-            <Image
-              src={project.cover}
-              alt={project.title}
-              fill
-              className="object-cover"
-            />
+            <Image src={project.cover} alt={project.title} fill className="object-cover" />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="font-mono text-xs tracking-widest text-muted uppercase">
-                No image
-              </span>
+              <span className="font-mono text-xs tracking-widest text-muted uppercase">No image</span>
             </div>
           )}
         </div>
 
-        {/* 설명 */}
-        <div className="border-t border-border pt-10">
-          {project.description ? (
-            <p className="font-sans text-base sm:text-lg text-ink/80 leading-relaxed">
-              {project.description}
-            </p>
-          ) : (
-            <p className="font-mono text-sm text-muted italic">
-              Description coming soon.
-            </p>
-          )}
-        </div>
+        {/* Content blocks */}
+        {project.content.length > 0 ? (
+          <div className="border-t border-border pt-10 flex flex-col gap-10">
+            {project.content.map((block, i) => (
+              <Block key={i} block={block} />
+            ))}
+          </div>
+        ) : (
+          <div className="border-t border-border pt-10">
+            <p className="font-mono text-sm text-muted italic">Description coming soon.</p>
+          </div>
+        )}
       </div>
     </main>
   )

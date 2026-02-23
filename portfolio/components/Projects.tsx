@@ -1,5 +1,3 @@
-'use client'
-
 import { projects } from '@/lib/data'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -28,8 +26,6 @@ const statusStyle: Record<string, { dot: string; label: string; badge: string }>
   'In-progress': { dot: 'bg-[#4F93D0] animate-pulse', label: 'In Progress', badge: 'bg-[#EDF4FB] text-[#4F93D0]' },
   'Not started': { dot: 'bg-[#9B9B9B]',               label: 'Not Started', badge: 'bg-[#F5F5F5] text-[#9B9B9B]' },
 }
-
-const FEATURED_IDS = ['hyper-last-will', 'sophybara', 'minwon99', 'golden-capsule']
 
 function ProjectCard({ project }: { project: typeof projects[number] }) {
   const st = statusStyle[project.status] ?? statusStyle['Done']
@@ -75,10 +71,8 @@ function ProjectCard({ project }: { project: typeof projects[number] }) {
 }
 
 export default function Projects() {
-  const featured = FEATURED_IDS.map(id => projects.find(p => p.id === id)!).filter(Boolean)
-  const rest = projects
-    .filter(p => !FEATURED_IDS.includes(p.id))
-    .sort((a, b) => Number(b.year) - Number(a.year))
+  const featured = projects.filter(p => p.featured)
+  const rest = projects.filter(p => !p.featured)
 
   return (
     <section id="projects" className="py-16 sm:py-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
@@ -86,30 +80,23 @@ export default function Projects() {
         Projects
       </h2>
 
-      {/* Featured Projects */}
       <div className="mb-4 sm:mb-5">
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           Featured
         </span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {featured.map(p => (
-            <ProjectCard key={p.id} project={p} />
-          ))}
+          {featured.map(p => <ProjectCard key={p.id} project={p} />)}
         </div>
       </div>
 
-      {/* Divider */}
       <hr className="border-border my-8 sm:my-10" />
 
-      {/* All Projects */}
       <div>
         <span className="font-mono text-[13px] tracking-widest uppercase text-muted block mb-4">
           All
         </span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {rest.map(p => (
-            <ProjectCard key={p.id} project={p} />
-          ))}
+          {rest.map(p => <ProjectCard key={p.id} project={p} />)}
         </div>
       </div>
     </section>
