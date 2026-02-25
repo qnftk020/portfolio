@@ -1,6 +1,6 @@
 # Yeonghwan Shin — Research Portfolio
 
-**HCI Researcher · AI Experience Design · Human-AI Interaction**
+**Digital Health Researcher · AI Experience Design**
 
 Built with Next.js 14 (App Router) + Tailwind CSS, statically exported for GitHub Pages.
 
