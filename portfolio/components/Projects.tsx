@@ -19,6 +19,8 @@ const topicColors: Record<string, string> = {
   'Hackathon':          'bg-gray-100 text-gray-500',
   'Philosophy':         'bg-indigo-50 text-indigo-600',
   'Virtual Reality':    'bg-cyan-50 text-cyan-600',
+  'Music':              'bg-rose-50 text-rose-600',
+  'Extended Reality':   'bg-teal-50 text-teal-600',
 }
 
 const statusStyle: Record<string, { dot: string; label: string; badge: string }> = {
