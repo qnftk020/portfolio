@@ -50,7 +50,7 @@ export default function Hero() {
         {/* RIGHT — large profile photo */}
         <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 shrink-0 overflow-hidden animate-fade-up opacity-0 delay-300 self-center md:self-end">
           <Image
-            src="/portfolio/images/profile.png"
+            src="/images/profile.png"
             alt="YeongHwan Shin"
             fill
             className="object-cover object-top"
