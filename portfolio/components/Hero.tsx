@@ -1,4 +1,4 @@
-import { profile, researchInterests } from '@/lib/data'
+import { profile } from '@/lib/data'
 import Image from 'next/image'
 
 export default function Hero() {
@@ -6,59 +6,59 @@ export default function Hero() {
     <section className="min-h-screen flex flex-col justify-end pb-12 sm:pb-16 pt-24 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
 
       {/* Top label */}
-      <div className="mb-6 sm:mb-8 animate-fade-in opacity-0">
+      <div className="mb-8 sm:mb-10 animate-fade-in opacity-0">
         <span className="font-mono text-[11px] tracking-widest2 uppercase text-muted">
           Portfolio · {new Date().getFullYear()}
         </span>
       </div>
 
-      {/* Profile photo + heading */}
-      <div className="mb-10 sm:mb-12 flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-10">
-        {/* Profile photo */}
-        <div className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 overflow-hidden rounded-full border border-border animate-fade-up opacity-0 delay-100">
+      {/* Two-column: name/bio left, photo right */}
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-16">
+
+        {/* LEFT — name + bio + links */}
+        <div className="flex-1">
+          <h1 className="font-serif text-[clamp(3.5rem,10vw,8rem)] leading-[0.88] font-light text-ink animate-fade-up opacity-0 delay-100 mb-8 sm:mb-12">
+            YeongHwan
+            <br />
+            <span className="italic">Shin</span>
+            <span className="text-accent">.</span>
+          </h1>
+
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between animate-fade-up opacity-0 delay-300">
+            <p className="font-sans text-sm sm:text-base font-light leading-relaxed text-ink/75 max-w-md">
+              {profile.bio}
+            </p>
+
+            <div className="flex flex-row sm:flex-col gap-4 sm:gap-2 shrink-0">
+              <span className="hidden sm:block font-mono text-[10px] tracking-widest uppercase text-muted mb-1">Connect</span>
+              <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer"
+                className="font-mono text-xs text-ink hover:text-accent transition-colors hover-underline">
+                LinkedIn →
+              </a>
+              <a href={profile.links.scholar} target="_blank" rel="noopener noreferrer"
+                className="font-mono text-xs text-ink hover:text-accent transition-colors hover-underline">
+                Scholar →
+              </a>
+              <a href={profile.links.instagram} target="_blank" rel="noopener noreferrer"
+                className="font-mono text-xs text-ink hover:text-accent transition-colors hover-underline">
+                Instagram →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT — large profile photo */}
+        <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 shrink-0 overflow-hidden animate-fade-up opacity-0 delay-300 self-center md:self-end">
           <Image
-            src="/images/profile.png"
+            src="/portfolio/images/profile.png"
             alt="YeongHwan Shin"
             fill
             className="object-cover object-top"
             priority
+            unoptimized
           />
         </div>
 
-        <h1 className="font-serif text-[clamp(3rem,12vw,9rem)] leading-[0.9] font-light text-ink animate-fade-up opacity-0 delay-100">
-          YeongHwan
-          <br />
-          <span className="italic">Shin</span>
-          <span className="text-accent">.</span>
-        </h1>
-      </div>
-
-      {/* Bio + links */}
-      <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between animate-fade-up opacity-0 delay-300">
-        <div className="flex-1 max-w-xl">
-          <p className="font-sans text-sm sm:text-base md:text-lg font-light leading-relaxed text-ink/80">
-            {profile.bio}
-          </p>
-        </div>
-
-        {/* Links */}
-        <div className="flex flex-row md:flex-col gap-4 md:gap-2 shrink-0 flex-wrap">
-          <span className="hidden md:block font-mono text-[10px] tracking-widest uppercase text-muted mb-1">
-            Connect
-          </span>
-          <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer"
-            className="font-mono text-xs text-ink hover:text-accent transition-colors hover-underline">
-            LinkedIn →
-          </a>
-          <a href={profile.links.scholar} target="_blank" rel="noopener noreferrer"
-            className="font-mono text-xs text-ink hover:text-accent transition-colors hover-underline">
-            Scholar →
-          </a>
-          <a href={profile.links.instagram} target="_blank" rel="noopener noreferrer"
-            className="font-mono text-xs text-ink hover:text-accent transition-colors hover-underline">
-            Instagram →
-          </a>
-        </div>
       </div>
     </section>
   )
