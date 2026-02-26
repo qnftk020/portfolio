@@ -1,4 +1,5 @@
 import { profile, researchInterests } from '@/lib/data'
+import Image from 'next/image'
 
 export default function Hero() {
   return (
@@ -11,8 +12,19 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* Main heading */}
-      <div className="mb-10 sm:mb-12">
+      {/* Profile photo + heading */}
+      <div className="mb-10 sm:mb-12 flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-10">
+        {/* Profile photo */}
+        <div className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 overflow-hidden rounded-full border border-border animate-fade-up opacity-0 delay-100">
+          <Image
+            src="/images/profile.png"
+            alt="YeongHwan Shin"
+            fill
+            className="object-cover object-top"
+            priority
+          />
+        </div>
+
         <h1 className="font-serif text-[clamp(3rem,12vw,9rem)] leading-[0.9] font-light text-ink animate-fade-up opacity-0 delay-100">
           YeongHwan
           <br />
