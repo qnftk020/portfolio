@@ -20,9 +20,9 @@ export const education = [
 ]
 
 export const researchInterests = [
-  'Children-Robot Interaction (CRI)',
   'Multi-agent',
   'AI-based Experience Design',
+  'Children-Robot Interaction (CRI)',
   'Digital After Life'
 ]
 
