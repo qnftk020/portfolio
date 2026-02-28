@@ -77,7 +77,7 @@ export default function Publications() {
                           {highlightAuthor(pub.authors, pub.highlight)}
                         </p>
                         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2">
-                          <span className="font-mono text-[11px] text-muted italic">{pub.venue}</span>
+                          <span className="font-mono text-[11px] text-ink/80 italic">{pub.venue}</span>
                           {pub.badge && (
                             <span className="font-mono text-[10px] px-2 py-0.5 bg-accent/10 text-accent tracking-wider">{pub.badge}</span>
                           )}
@@ -116,7 +116,7 @@ export default function Publications() {
                     )}
                   </h4>
                   <p className="font-sans text-xs text-ink/50 mt-1">{pub.authors}</p>
-                  <p className="font-mono text-[11px] text-muted italic mt-1">{pub.venue}</p>
+                  <p className="font-mono text-[11px] text-ink/80 italic mt-1">{pub.venue}</p>
                 </div>
               ))}
             </YearAccordion>
