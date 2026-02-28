@@ -201,8 +201,8 @@ async function parseBlocks(notion, blocks, slug, imageCounter) {
 async function main() {
   const token = process.env.NOTION_TOKEN
   if (!token) {
-    console.error('❌  NOTION_TOKEN environment variable is not set')
-    process.exit(1)
+    console.warn('⚠️  NOTION_TOKEN not set — skipping Notion fetch, using existing notion-projects.json')
+    process.exit(0)
   }
 
   const notion = new Client({ auth: token })
