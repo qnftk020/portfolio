@@ -16,6 +16,7 @@ export type ContentBlock =
   | { type: 'video';   url: string;     caption?: string }
   | { type: 'youtube'; videoId: string; caption?: string }
   | { type: 'heading'; level: 1 | 2 | 3; text: string }
+  | { type: 'toggle';  title: string;   children: ContentBlock[] }
 
 export interface Project {
   slug: string
