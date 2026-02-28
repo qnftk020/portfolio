@@ -49,7 +49,6 @@ export default function Hero() {
             src="/images/profile.png"
             alt="YeongHwan Shin"
             fill
-            className="object-cover object-top grayscale"
             priority
             unoptimized
           />
