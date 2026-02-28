@@ -157,15 +157,19 @@ async function parseBlocks(notion, blocks, slug, imageCounter) {
       }
     }
 
-    // 토글 (자식 블록 재귀 처리)
-    else if (type === 'toggle' && block.has_children) {
-      try {
-        const children = await notion.blocks.children.list({ block_id: block.id })
-        const childContent = await parseBlocks(notion, children.results, slug, imageCounter)
-        content.push(...childContent)
-      } catch (e) {
-        console.warn(`  ✗ toggle children fetch failed: ${e.message}`)
+    // 토글 (제목 + 자식 블록 재귀 처리)
+    else if (type === 'toggle') {
+      const toggleTitle = block.toggle?.rich_text?.map(r => r.plain_text).join('') || ''
+      let children = []
+      if (block.has_children) {
+        try {
+          const res = await notion.blocks.children.list({ block_id: block.id })
+          children = await parseBlocks(notion, res.results, slug, imageCounter)
+        } catch (e) {
+          console.warn(`  ✗ toggle children fetch failed: ${e.message}`)
+        }
       }
+      content.push({ type: 'toggle', title: toggleTitle, children })
     }
 
     // column_list (컬럼 레이아웃)
