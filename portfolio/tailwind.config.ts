@@ -16,11 +16,12 @@ const config: Config = {
         xl: '1280px',
       },
       colors: {
-        paper: '#F5F2EE',
-        ink: '#0F0F0E',
-        accent: '#B85C38',
-        muted: '#8A8680',
-        border: '#E0DDD9',
+        paper: '#0C0C0B',
+        ink: '#EDEAE4',
+        accent: '#D4714A',
+        muted: '#5A5856',
+        border: '#1F1F1D',
+        surface: '#141413',
       },
       fontFamily: {
         serif: ['Cormorant Garamond', 'Georgia', 'serif'],
