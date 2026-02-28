@@ -10,20 +10,20 @@ import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="bg-paper text-ink">
+    <main className="bg-[#0C0C0B] text-ink">
       <Nav />
       <Hero />
-      <hr className="section-rule" />
+      <div className="border-t border-[#1F1F1D]" />
       <About />
-      <hr className="section-rule" />
+      <div className="border-t border-[#1F1F1D]" />
       <Experience />
-      <hr className="section-rule" />
+      <div className="border-t border-[#1F1F1D]" />
       <Projects />
-      <hr className="section-rule" />
+      <div className="border-t border-[#1F1F1D]" />
       <Publications />
-      <hr className="section-rule" />
+      <div className="border-t border-[#1F1F1D]" />
       <Awards />
-      <hr className="section-rule" />
+      <div className="border-t border-[#1F1F1D]" />
       <Skills />
       <Footer />
     </main>

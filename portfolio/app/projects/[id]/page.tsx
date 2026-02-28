@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-// notion-projects.json 이 비어있을 때를 위한 fallback slugs
 const FALLBACK_SLUGS = [
   'hyper-last-will', 'sophybara', 'golden-capsule', 'minwon-99',
   'paw-pulse', 'jumanji-ar', 'see-the-music', 'doccia',
@@ -11,50 +10,48 @@ const FALLBACK_SLUGS = [
 ]
 
 export async function generateStaticParams() {
-  const slugs = projects.length > 0
-    ? projects.map(p => p.slug)
-    : FALLBACK_SLUGS
+  const slugs = projects.length > 0 ? projects.map(p => p.slug) : FALLBACK_SLUGS
   return slugs.map(id => ({ id }))
 }
 
 const topicColors: Record<string, string> = {
-  'Mixed Reality':      'bg-gray-100 text-gray-500',
-  'Media Art':          'bg-violet-50 text-violet-600',
-  'Mobility Design':    'bg-red-50 text-red-600',
-  'LLM':               'bg-orange-50 text-orange-600',
-  'Multi-agent':        'bg-orange-50 text-orange-700',
-  'User Experience':    'bg-yellow-50 text-yellow-600',
-  'Ergonomics':         'bg-blue-50 text-blue-600',
-  'CAE':               'bg-gray-100 text-gray-500',
-  'Product Design':     'bg-pink-50 text-pink-600',
-  'Experiment Design':  'bg-purple-50 text-purple-600',
-  'Game':              'bg-yellow-50 text-yellow-600',
-  'Augmented Reality':  'bg-green-50 text-green-600',
-  'Service Design':     'bg-green-50 text-green-700',
-  'Hackathon':          'bg-gray-100 text-gray-500',
-  'Philosophy':         'bg-indigo-50 text-indigo-600',
-  'Virtual Reality':    'bg-cyan-50 text-cyan-600',
+  'Mixed Reality':      'bg-white/5 text-white/40',
+  'Media Art':          'bg-violet-500/10 text-violet-400',
+  'Mobility Design':    'bg-red-500/10 text-red-400',
+  'LLM':               'bg-orange-500/10 text-orange-400',
+  'Multi-agent':        'bg-orange-500/10 text-orange-300',
+  'User Experience':    'bg-yellow-500/10 text-yellow-400',
+  'Ergonomics':         'bg-blue-500/10 text-blue-400',
+  'CAE':               'bg-white/5 text-white/40',
+  'Product Design':     'bg-pink-500/10 text-pink-400',
+  'Experiment Design':  'bg-purple-500/10 text-purple-400',
+  'Game':              'bg-yellow-500/10 text-yellow-400',
+  'Augmented Reality':  'bg-green-500/10 text-green-400',
+  'Service Design':     'bg-green-500/10 text-green-300',
+  'Hackathon':          'bg-white/5 text-white/40',
+  'Philosophy':         'bg-indigo-500/10 text-indigo-400',
+  'Virtual Reality':    'bg-cyan-500/10 text-cyan-400',
 }
 
 const statusStyle: Record<string, { dot: string; label: string; badge: string }> = {
-  'Done':        { dot: 'bg-[#4DAB9A]',               label: 'Done',        badge: 'bg-[#EDFAF5] text-[#4DAB9A]' },
-  'In-progress': { dot: 'bg-[#4F93D0] animate-pulse', label: 'In Progress', badge: 'bg-[#EDF4FB] text-[#4F93D0]' },
-  'Not started': { dot: 'bg-[#9B9B9B]',               label: 'Not Started', badge: 'bg-[#F5F5F5] text-[#9B9B9B]' },
+  'Done':        { dot: 'bg-[#4DAB9A]',               label: 'Done',        badge: 'bg-[#4DAB9A]/10 text-[#4DAB9A]' },
+  'In-progress': { dot: 'bg-[#4F93D0] animate-pulse', label: 'In Progress', badge: 'bg-[#4F93D0]/10 text-[#4F93D0]' },
+  'Not started': { dot: 'bg-white/20',                label: 'Not Started', badge: 'bg-white/5 text-white/30' },
 }
 
 function Block({ block }: { block: ContentBlock }) {
   if (block.type === 'heading') {
     const cls = block.level === 1
-      ? 'font-serif text-2xl sm:text-3xl font-light text-ink mt-10 mb-3'
+      ? 'font-serif text-2xl sm:text-3xl font-light text-ink mt-9 mb-3'
       : block.level === 2
-      ? 'font-serif text-xl sm:text-2xl font-light text-ink mt-8 mb-2'
-      : 'font-sans text-base font-semibold text-ink mt-6 mb-1 uppercase tracking-wider'
+      ? 'font-serif text-xl sm:text-2xl font-light text-ink mt-7 mb-2'
+      : 'font-sans text-sm font-semibold text-ink/60 mt-5 mb-1 uppercase tracking-widest'
     return <h2 className={cls}>{block.text}</h2>
   }
 
   if (block.type === 'text') {
     return (
-      <p className="font-sans text-base sm:text-lg text-ink/80 leading-relaxed whitespace-pre-wrap">
+      <p className="font-sans text-base sm:text-lg text-ink/65 leading-relaxed whitespace-pre-wrap">
         {block.text}
       </p>
     )
@@ -63,13 +60,11 @@ function Block({ block }: { block: ContentBlock }) {
   if (block.type === 'image') {
     return (
       <figure className="w-full">
-        <div className="relative w-full aspect-video bg-[#EDEBE7] overflow-hidden">
+        <div className="relative w-full aspect-video bg-[#141413] overflow-hidden">
           <Image src={block.url} alt={block.caption ?? ''} fill className="object-cover" unoptimized />
         </div>
         {block.caption && (
-          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">
-            {block.caption}
-          </figcaption>
+          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">{block.caption}</figcaption>
         )}
       </figure>
     )
@@ -80,9 +75,7 @@ function Block({ block }: { block: ContentBlock }) {
       <figure className="w-full">
         <video src={block.url} controls className="w-full aspect-video bg-black" />
         {block.caption && (
-          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">
-            {block.caption}
-          </figcaption>
+          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">{block.caption}</figcaption>
         )}
       </figure>
     )
@@ -101,9 +94,7 @@ function Block({ block }: { block: ContentBlock }) {
           />
         </div>
         {block.caption && (
-          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">
-            {block.caption}
-          </figcaption>
+          <figcaption className="mt-2 font-mono text-[10px] text-muted text-center">{block.caption}</figcaption>
         )}
       </figure>
     )
@@ -115,28 +106,42 @@ function Block({ block }: { block: ContentBlock }) {
 export default function ProjectPage({ params }: { params: { id: string } }) {
   const project = projects.find(p => p.slug === params.id)
   if (!project) notFound()
+
   const st = statusStyle[project.status] ?? statusStyle['Done']
 
+  // 썸네일(coverUrl)과 동일한 첫 번째 이미지는 본문에서 제거
+  const contentBlocks = project.coverUrl
+    ? (() => {
+        let skipped = false
+        return project.content.filter(b => {
+          if (!skipped && b.type === 'image' && b.url === project.coverUrl) {
+            skipped = true
+            return false
+          }
+          return true
+        })
+      })()
+    : project.content
+
   return (
-    <main className="min-h-screen bg-paper text-ink">
-      <div className="px-5 sm:px-8 md:px-12 py-6 border-b border-border">
-        <Link
-          href="/#projects"
-          className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-muted hover:text-ink transition-colors"
-        >
+    <main className="min-h-screen bg-[#0C0C0B] text-ink">
+      {/* Top bar */}
+      <div className="px-5 sm:px-8 md:px-12 py-5 border-b border-[#1F1F1D]">
+        <Link href="/#projects"
+          className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-muted hover:text-ink transition-colors">
           <span>←</span><span>Back to Projects</span>
         </Link>
       </div>
 
-      <div className="max-w-4xl mx-auto px-5 sm:px-8 md:px-12 py-16 sm:py-24">
-        {/* Meta badges */}
-        <div className="flex flex-wrap items-center gap-2 mb-6">
+      <div className="max-w-4xl mx-auto px-5 sm:px-8 md:px-12 py-14 sm:py-20">
+        {/* Badges */}
+        <div className="flex flex-wrap items-center gap-2 mb-5">
           <span className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wide px-2 py-1 ${st.badge}`}>
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${st.dot}`} />
             {st.label}
           </span>
           {(project.topic ?? []).map(t => (
-            <span key={t} className={`font-mono text-[10px] tracking-wide px-2 py-1 ${topicColors[t] ?? 'bg-gray-100 text-gray-500'}`}>
+            <span key={t} className={`font-mono text-[10px] tracking-wide px-2 py-1 ${topicColors[t] ?? 'bg-white/5 text-white/40'}`}>
               {t}
             </span>
           ))}
@@ -146,32 +151,28 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ink leading-tight mb-3">
           {project.title}
         </h1>
-        <p className="font-mono text-xs text-muted mb-2">{project.year}</p>
+        <p className="font-mono text-xs text-muted mb-1">{project.year}</p>
         {project.authors && (
-          <p className="font-mono text-xs text-muted mb-2">{project.authors}</p>
+          <p className="font-mono text-xs text-muted mb-1">{project.authors}</p>
         )}
         {project.paper && (
-          <a
-            href={project.paper}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block font-mono text-xs text-muted underline underline-offset-2 hover:text-ink mb-6"
-          >
+          <a href={project.paper} target="_blank" rel="noopener noreferrer"
+            className="inline-block font-mono text-xs text-accent/70 underline underline-offset-2 hover:text-accent mb-6">
             View Paper / Link →
           </a>
         )}
 
         {/* Cover */}
         {project.coverUrl && (
-          <div className="aspect-video w-full bg-[#EDEBE7] overflow-hidden relative mb-16">
+          <div className="aspect-video w-full bg-[#141413] overflow-hidden relative mb-14">
             <Image src={project.coverUrl} alt={project.title} fill className="object-cover" unoptimized />
           </div>
         )}
 
         {/* Content */}
-        <div className="border-t border-border pt-10 flex flex-col gap-8">
-          {project.content.length > 0
-            ? project.content.map((b, i) => <Block key={i} block={b} />)
+        <div className="border-t border-[#1F1F1D] pt-9 flex flex-col gap-7">
+          {contentBlocks.length > 0
+            ? contentBlocks.map((b, i) => <Block key={i} block={b} />)
             : <p className="font-sans text-base text-muted">Content coming soon.</p>
           }
         </div>

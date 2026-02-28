@@ -4,12 +4,11 @@ import { education, researchInterests } from '@/lib/data'
 export default function About() {
   return (
     <Section id="about" title="Education">
-      <div className="grid md:grid-cols-2 gap-10 md:gap-20">
-        {/* Left: education timeline */}
+      <div className="grid md:grid-cols-2 gap-8 md:gap-16">
         <div className="space-y-0">
           {[...education].reverse().map((edu, i) => (
-            <div key={i} className="relative pl-5 pb-8 last:pb-0 border-l border-border group">
-              <div className="absolute -left-[3px] top-1 w-[5px] h-[5px] rounded-full bg-border group-hover:bg-accent transition-colors" />
+            <div key={i} className="relative pl-5 pb-7 last:pb-0 border-l border-[#1F1F1D] group">
+              <div className="absolute -left-[3px] top-1 w-[5px] h-[5px] rounded-full bg-[#1F1F1D] group-hover:bg-accent transition-colors" />
               <span className="font-mono text-[11px] tracking-wider text-muted block mb-1.5">
                 {edu.period}
               </span>
@@ -17,30 +16,29 @@ export default function About() {
                 {edu.institution}
               </h3>
               {edu.degree && (
-                <p className="font-sans text-sm text-ink/60 mt-1">{edu.degree}</p>
+                <p className="font-sans text-sm text-ink/50 mt-1">{edu.degree}</p>
               )}
             </div>
           ))}
         </div>
 
-        {/* Right: research focus + languages */}
-        <div className="space-y-10">
+        <div className="space-y-8">
           <div>
-            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-4">
+            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-3">
               Research Interest
             </span>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               {researchInterests.map((focus) => (
                 <li key={focus} className="flex items-start gap-3">
                   <span className="font-mono text-accent text-sm mt-0.5">—</span>
-                  <span className="font-sans text-sm sm:text-base text-ink/80">{focus}</span>
+                  <span className="font-sans text-sm sm:text-base text-ink/70">{focus}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-4">
+            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-3">
               Languages
             </span>
             <div className="space-y-2">

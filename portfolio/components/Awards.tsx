@@ -16,36 +16,18 @@ function groupAwardsByYear(items: typeof awards) {
     .sort((a, b) => Number(b.year) - Number(a.year))
 }
 
-function YearAccordion({
-  year,
-  count,
-  defaultOpen,
-  children,
-}: {
-  year: string
-  count: number
-  defaultOpen: boolean
-  children: React.ReactNode
+function YearAccordion({ year, count, defaultOpen, children }: {
+  year: string; count: number; defaultOpen: boolean; children: React.ReactNode
 }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
-    <div className="border-b border-border last:border-b-0">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-4 group"
-        aria-expanded={open}
-      >
+    <div className="border-b border-[#1F1F1D] last:border-b-0">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 group" aria-expanded={open}>
         <div className="flex items-center gap-4">
-          <span className="font-serif text-2xl sm:text-3xl font-light text-ink group-hover:text-accent transition-colors">
-            {year}
-          </span>
-          <span className="font-mono text-xs text-muted">
-            {count} award{count > 1 ? 's' : ''}
-          </span>
+          <span className="font-serif text-2xl sm:text-3xl font-light text-ink group-hover:text-accent transition-colors">{year}</span>
+          <span className="font-mono text-xs text-muted">{count} award{count > 1 ? 's' : ''}</span>
         </div>
-        <span className={`font-mono text-muted text-xl transition-transform duration-200 ${open ? 'rotate-45' : ''}`}>
-          +
-        </span>
+        <span className={`font-mono text-muted text-xl transition-transform duration-200 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       {open && <div className="pb-4">{children}</div>}
     </div>
@@ -54,17 +36,13 @@ function YearAccordion({
 
 export default function Awards() {
   const grouped = groupAwardsByYear(awards)
-
   return (
-    <Section id="awards" title="Awards &amp; Recognition" className="bg-paper">
+    <Section id="awards" title="Awards & Recognition">
       <div className="max-w-2xl">
         {grouped.map(({ year, list }, i) => (
           <YearAccordion key={year} year={year} count={list.length} defaultOpen={i === 0}>
             {list.map((award, j) => (
-              <div
-                key={j}
-                className="group flex items-start gap-4 sm:gap-6 py-3 border-b border-border/50 last:border-b-0"
-              >
+              <div key={j} className="group flex items-start gap-4 sm:gap-6 py-3 border-b border-[#1F1F1D]/50 last:border-b-0">
                 <span className="font-mono text-[10px] text-muted tracking-wider mt-0.5 shrink-0 w-10">
                   {award.year.slice(5)}
                 </span>
@@ -72,7 +50,7 @@ export default function Awards() {
                   <span className="font-serif text-base sm:text-lg font-medium text-ink block leading-tight group-hover:text-accent transition-colors">
                     {award.title}
                   </span>
-                  <span className="font-sans text-sm text-ink/55 mt-0.5 block">{award.event}</span>
+                  <span className="font-sans text-sm text-ink/40 mt-0.5 block">{award.event}</span>
                 </div>
               </div>
             ))}
