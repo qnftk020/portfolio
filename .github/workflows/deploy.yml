@@ -1,37 +1,51 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 21 * * *'
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Install dependencies
         run: npm install
         working-directory: ./portfolio
-      - name: Build
+
+      - name: Fetch Notion data & build
         run: npm run build
         working-directory: ./portfolio
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+
       - name: Add .nojekyll
         run: touch portfolio/out/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./portfolio/out
+
   deploy:
     environment:
       name: github-pages
