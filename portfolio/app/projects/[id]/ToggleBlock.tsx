@@ -40,26 +40,26 @@ function InnerBlock({ block }: { block: ContentBlock }) {
     )
   }
   if (block.type === 'toggle') {
-    return <ToggleBlock title={block.title} children={block.children} />
+    return <ToggleBlock title={block.title} items={block.children} />
   }
   return null
 }
 
-export default function ToggleBlock({ title, children }: { title: string; children: ContentBlock[] }) {
+export default function ToggleBlock({ title, items }: { title: string; items: ContentBlock[] }) {
   const [open, setOpen] = useState(false)
 
   return (
     <div className="border border-[#1F1F1D] rounded-sm overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-white/3 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-white/5 transition-colors"
       >
         <span className="font-sans text-base text-ink/80">{title}</span>
         <span className={`font-mono text-muted text-lg transition-transform duration-200 ml-4 shrink-0 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       {open && (
         <div className="px-4 pb-4 pt-1 flex flex-col gap-4 border-t border-[#1F1F1D]">
-          {children.map((b, i) => <InnerBlock key={i} block={b} />)}
+          {items.map((b, i) => <InnerBlock key={i} block={b} />)}
         </div>
       )}
     </div>
