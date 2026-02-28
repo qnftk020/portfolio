@@ -102,7 +102,7 @@ function Block({ block }: { block: ContentBlock }) {
   }
 
   if (block.type === 'toggle') {
-    return <ToggleBlock title={block.title} children={block.children} />
+    return <ToggleBlock title={block.title} items={block.children} />
   }
 
   return null
