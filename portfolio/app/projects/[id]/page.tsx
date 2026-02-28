@@ -2,6 +2,7 @@ import projects, { Project, ContentBlock } from '@/data/projects'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import ToggleBlock from './ToggleBlock'
 
 const FALLBACK_SLUGS = [
   'hyper-last-will', 'sophybara', 'golden-capsule', 'minwon-99',
@@ -98,6 +99,10 @@ function Block({ block }: { block: ContentBlock }) {
         )}
       </figure>
     )
+  }
+
+  if (block.type === 'toggle') {
+    return <ToggleBlock title={block.title} children={block.children} />
   }
 
   return null
