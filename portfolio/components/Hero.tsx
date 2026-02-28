@@ -43,16 +43,19 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="relative w-44 sm:w-52 md:w-60 shrink-0 overflow-hidden animate-fade-up opacity-0 delay-300 self-center md:self-end" style={{aspectRatio: '3/4'}}>
+
+        <div className="w-44 sm:w-52 md:w-60 shrink-0 animate-fade-up opacity-0 delay-300 self-center md:self-end">
           <Image
             src="/images/profile.png"
             alt="YeongHwan Shin"
-            fill
-            className="object-cover object-top"
+            width={400}
+            height={600}
+            className="w-full h-auto"
             priority
             unoptimized
           />
         </div>
+
       </div>
     </section>
   )
