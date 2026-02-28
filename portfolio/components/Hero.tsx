@@ -44,7 +44,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="w-44 sm:w-52 md:w-60 shrink-0 animate-fade-up opacity-0 delay-300 self-center md:self-end">
+        <div className="w-52 sm:w-64 md:w-72 shrink-0 animate-fade-up opacity-0 delay-300 self-center md:self-end">
           <Image
             src="/images/profile.png"
             alt="YeongHwan Shin"
