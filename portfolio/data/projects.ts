@@ -1,20 +1,21 @@
 // ============================================================
-// 프로젝트 데이터 — 여기서 직접 수정하세요!
-// ============================================================
+// 이 파일은 scripts/fetch-notion.mjs 가 생성한
+// notion-projects.json 을 읽어서 타입을 붙여 export 합니다.
 //
-// 📁 파일 구조 (public/projects/{slug}/ 안에 넣으면 됩니다)
-//
-//   public/projects/golden-capsule/
-//     thumbnail.jpg       ← 카드 썸네일 (coverUrl)
-//     images/
-//       01.jpg            ← 상세 이미지
-//       02.jpg
-//     videos/
-//       01.mp4            ← 상세 영상
-//
+// ✏️  summary, featured 등 수동 오버라이드가 필요한 경우
+//     이 파일 맨 아래 overrides 객체를 수정하세요.
 // ============================================================
 
+import rawProjects from './notion-projects.json'
+
 export type ProjectStatus = 'Done' | 'In-progress' | 'Not started'
+
+export type ContentBlock =
+  | { type: 'text';    text: string }
+  | { type: 'image';   url: string;     caption?: string }
+  | { type: 'video';   url: string;     caption?: string }
+  | { type: 'youtube'; videoId: string; caption?: string }
+  | { type: 'heading'; level: 1 | 2 | 3; text: string }
 
 export interface Project {
   slug: string
@@ -23,189 +24,69 @@ export interface Project {
   status: ProjectStatus
   topic: string[]
   summary: string
-  coverUrl: string | null   // 썸네일: /projects/{slug}/thumbnail.jpg
+  coverUrl: string | null
   featured: boolean
+  authors?: string
+  paper?: string
   content: ContentBlock[]
 }
 
-export type ContentBlock =
-  | { type: 'text';  text: string }
-  | { type: 'image'; url: string; caption?: string }
-  | { type: 'video'; url: string; caption?: string }
-
-const projects: Project[] = [
-
-  // ─── FEATURED ─────────────────────────────────────────────
-  {
-    slug: 'hyper-last-will',
-    title: 'Hyper Last Will',
-    year: 2026,
-    status: 'Not started',
-    topic: ['LLM', 'Multi-agent', 'Philosophy'],
-    summary: 'AI-powered legacy documentation system',
-    coverUrl: null,
-    // coverUrl: '/projects/hyper-last-will/thumbnail.jpg',
+// ─── 수동 보완 데이터 (Notion에 없는 summary / featured 등) ──
+const overrides: Record<string, Partial<Project>> = {
+  'hyper-last-will': {
     featured: true,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-      // { type: 'image', url: '/projects/hyper-last-will/images/01.jpg', caption: '캡션' },
-      // { type: 'video', url: '/projects/hyper-last-will/videos/01.mp4' },
-    ],
+    summary: 'AI-powered multi-agent system for creating meaningful last wills and personal legacy documentation.',
   },
-
-  {
-    slug: 'sophybara',
-    title: 'SophyBARA',
-    year: 2025,
-    status: 'In-progress',
-    topic: ['LLM', 'User Experience'],
-    summary: 'Conversational AI companion',
-    coverUrl: null,
-    // coverUrl: '/projects/sophybara/thumbnail.jpg',
+  'sophybara': {
     featured: true,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
+    summary: 'A multi-agent philosophy education platform — watch Plato and Nietzsche debate, then jump in yourself.',
   },
-
-  {
-    slug: 'golden-capsule',
-    title: '[Graduation Project] Golden Capsule',
-    year: 2023,
-    status: 'Done',
-    topic: ['Media Art', 'Mixed Reality'],
-    summary: 'Interactive time capsule experience',
-    coverUrl: '/projects/golden-capsule/thumbnail.jpg',   // ← 예시 이미지 연결됨
+  'golden-capsule': {
     featured: true,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-      { type: 'image', url: '/projects/golden-capsule/images/01.jpg', caption: '예시 이미지' },
-      // { type: 'video', url: '/projects/golden-capsule/videos/01.mp4' },
-    ],
+    summary: 'Non-powered hands-free IV pump for disaster rescue sites. James Dyson Award 2023 International Winner.',
   },
-
-  {
-    slug: 'minwon-99',
-    title: 'Minwon 99',
-    year: 2024,
-    status: 'Done',
-    topic: ['Service Design', 'User Experience'],
-    summary: 'Civic service redesign project',
-    coverUrl: null,
-    // coverUrl: '/projects/minwon-99/thumbnail.jpg',
+  'minwon-99': {
     featured: true,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
+    summary: 'LLM-based civil complaint platform: helps citizens draft, ranks similar cases, and moderates harmful content.',
   },
+  'paw-pulse': {
+    summary: 'AR + AI pet emotion tracker that reveals how your environment affects your pet throughout the day.',
+  },
+  'jumanji-ar': {
+    summary: 'Hybrid MR board game blending AR visuals, gesture control, and Arduino hardware.',
+  },
+  'see-the-music': {
+    summary: 'VR/AR exhibition that transforms music into visual form — see the bass, feel the rhythm.',
+  },
+  'doccia': {
+    summary: 'Apple Vision Pro virtual docent using GPT API for comprehensive museum exhibit commentary.',
+  },
+  'rolling-pizza': {
+    summary: 'Social impact game tackling food waste through playful mechanics. Tech for Impact Hackathon.',
+  },
+  'conference-ar': {
+    summary: 'AR HMD + mobile hybrid system for conference environments — usability research in progress.',
+  },
+  'gyroscope-kickboard': {
+    summary: 'CAE study proving gyroscopic effect stabilizes electric kick scooters on uneven terrain.',
+  },
+}
 
-  // ─── ALL ──────────────────────────────────────────────────
-  {
-    slug: 'paw-pulse',
-    title: 'Paw Pulse',
-    year: 2025,
-    status: 'Done',
-    topic: ['User Experience', 'Product Design'],
-    summary: 'Pet health monitoring app',
-    coverUrl: null,
-    // coverUrl: '/projects/paw-pulse/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
+// notion-projects.json 이 아직 없을 때 빌드 에러 방지용 fallback
+let notionData: unknown[] = []
+try {
+  notionData = rawProjects as unknown[]
+} catch {
+  notionData = []
+}
 
-  {
-    slug: 'jumanji-ar',
-    title: 'Jumanji AR',
-    year: 2025,
-    status: 'Done',
-    topic: ['Augmented Reality', 'Game'],
-    summary: 'AR-enhanced Jumanji board game experience',
-    coverUrl: null,
-    // coverUrl: '/projects/jumanji-ar/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
+const projects: Project[] = (notionData as Project[]).map((p) => ({
+  ...p,
+  ...(overrides[p.slug] ?? {}),
+  summary: overrides[p.slug]?.summary ?? p.summary ?? '',
+}))
 
-  {
-    slug: 'see-the-music',
-    title: 'SeeTheMusic : VR/AR Music Responsive Media Art',
-    year: 2024,
-    status: 'Done',
-    topic: ['Media Art', 'Virtual Reality', 'Augmented Reality'],
-    summary: 'Music-reactive immersive media art installation',
-    coverUrl: null,
-    // coverUrl: '/projects/see-the-music/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
-
-  {
-    slug: 'doccia',
-    title: 'Doccia',
-    year: 2024,
-    status: 'Done',
-    topic: ['Product Design', 'User Experience'],
-    summary: 'Smart shower product design',
-    coverUrl: null,
-    // coverUrl: '/projects/doccia/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
-
-  {
-    slug: 'rolling-pizza',
-    title: '[Tech for Impact] Rolling Pizza',
-    year: 2024,
-    status: 'Done',
-    topic: ['Service Design', 'Hackathon'],
-    summary: 'Social impact pizza delivery service',
-    coverUrl: null,
-    // coverUrl: '/projects/rolling-pizza/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
-
-  {
-    slug: 'conference-ar',
-    title: 'Conference AR',
-    year: 2024,
-    status: 'Done',
-    topic: ['Augmented Reality', 'Mixed Reality'],
-    summary: 'AR-enhanced conference experience',
-    coverUrl: null,
-    // coverUrl: '/projects/conference-ar/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
-
-  {
-    slug: 'gyroscope-kickboard',
-    title: 'Gyroscope + Kickboard',
-    year: 2022,
-    status: 'Done',
-    topic: ['Mobility Design', 'Ergonomics', 'CAE'],
-    summary: 'Gyroscope-stabilized electric kickboard design',
-    coverUrl: null,
-    // coverUrl: '/projects/gyroscope-kickboard/thumbnail.jpg',
-    featured: false,
-    content: [
-      { type: 'text', text: 'Description coming soon.' },
-    ],
-  },
-]
+export const featuredProjects = projects.filter(p => p.featured)
+export const allProjects = projects
 
 export default projects
-export const featuredProjects = projects.filter(p => p.featured)
-export const allProjects = projects.filter(p => !p.featured)

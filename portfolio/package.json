@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "fetch-notion": "node scripts/fetch-notion.mjs",
+    "build": "node scripts/fetch-notion.mjs && next build",
+    "build:skip-notion": "next build",
     "start": "next start",
-    "export": "next build",
+    "export": "node scripts/fetch-notion.mjs && next build",
     "deploy": "npm run build && touch out/.nojekyll"
   },
   "dependencies": {
+    "@notionhq/client": "^5.11.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
