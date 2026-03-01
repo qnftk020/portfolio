@@ -32,7 +32,7 @@ export default function Nav() {
     }`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 h-14 sm:h-16 flex items-center justify-between">
         <a href="#" className="flex items-center hover:opacity-70 transition-opacity">
-          <img src="/images/logo.svg" alt="Y.S" className="h-8 w-8 object-contain" style={{mixBlendMode: 'screen'}} />
+          <img src="/images/logo.svg" alt="Y.S" className="h-8 w-8 object-contain" style={{filter: 'invert(1)'}} />
         </a>
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {navItems.map((item) => (
