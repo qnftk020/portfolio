@@ -91,7 +91,7 @@ export default function Publications() {
                               <span className="font-mono text-[10px] px-2 py-0.5 bg-accent/10 text-accent tracking-wider">{pub.badge}</span>
                             )}
                           </div>
-                          <span className="font-mono text-[10px] text-muted/50 mr-2">[{String(startIndex - i).padStart(2, '0')}]</span>
+                          <span className="font-mono text-[10px] text-muted/50 mr-2"></span>
                           <h4 className="font-mono text-sm text-ink leading-snug inline">{pub.title}</h4>
                           <p className="font-mono text-[11px] text-ink/45 mt-2 leading-loose">
                             {highlightAuthor(pub.authors, pub.highlight)}
