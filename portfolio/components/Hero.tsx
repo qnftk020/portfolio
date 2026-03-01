@@ -12,7 +12,6 @@ export default function Hero() {
       </div>
 
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-16">
-
         <div className="flex-1">
           <h1 className="font-serif text-[clamp(3.5rem,10vw,8rem)] leading-[0.88] font-light text-ink animate-fade-up opacity-0 delay-100 mb-8 sm:mb-12">
             YeongHwan
@@ -22,24 +21,17 @@ export default function Hero() {
           </h1>
 
           <div className="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between animate-fade-up opacity-0 delay-300">
-            <p className="font-sans text-sm sm:text-base font-light leading-relaxed text-ink/60 max-w-md">
+            <p className="font-mono text-xs sm:text-sm leading-loose text-ink/50 max-w-md">
               {profile.bio}
             </p>
-
             <div className="flex flex-row sm:flex-col gap-4 sm:gap-2 shrink-0">
               <span className="hidden sm:block font-mono text-[10px] tracking-widest uppercase text-muted mb-1">Connect</span>
               <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer"
-                className="font-mono text-xs text-ink/60 hover:text-accent transition-colors hover-underline">
-                LinkedIn →
-              </a>
+                className="font-mono text-xs text-ink/50 hover:text-accent transition-colors hover-underline">LinkedIn →</a>
               <a href={profile.links.scholar} target="_blank" rel="noopener noreferrer"
-                className="font-mono text-xs text-ink/60 hover:text-accent transition-colors hover-underline">
-                Scholar →
-              </a>
+                className="font-mono text-xs text-ink/50 hover:text-accent transition-colors hover-underline">Scholar →</a>
               <a href={profile.links.instagram} target="_blank" rel="noopener noreferrer"
-                className="font-mono text-xs text-ink/60 hover:text-accent transition-colors hover-underline">
-                Instagram →
-              </a>
+                className="font-mono text-xs text-ink/50 hover:text-accent transition-colors hover-underline">Instagram →</a>
             </div>
           </div>
         </div>
@@ -55,7 +47,6 @@ export default function Hero() {
             unoptimized
           />
         </div>
-
       </div>
     </section>
   )

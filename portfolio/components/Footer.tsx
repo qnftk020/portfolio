@@ -19,12 +19,8 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-7 pt-5 border-t border-[#1F1F1D] flex flex-col sm:flex-row sm:justify-between gap-2">
-          <span className="font-mono text-[10px] text-muted/50">
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
-          </span>
-          <span className="font-mono text-[10px] text-muted/30">
-            Built with Next.js · Tailwind CSS
-          </span>
+          <span className="font-mono text-[10px] text-muted/50">© {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
+          <span className="font-mono text-[10px] text-muted/30">Built with Next.js · Tailwind CSS</span>
         </div>
       </div>
     </footer>

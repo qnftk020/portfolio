@@ -18,15 +18,14 @@ export default function Experience() {
                 </span>
               )}
             </div>
-
             <div>
-              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-1.5">
                 <h3 className="font-serif text-lg sm:text-xl font-medium text-white leading-tight">{exp.role}</h3>
                 <span className="font-mono text-xs text-white/30">@</span>
                 <span className="font-serif text-lg sm:text-xl italic font-bold text-accent/70 leading-tight">{exp.org}</span>
               </div>
-              <p className="font-sans text-xs sm:text-sm text-white/40 mb-1.5">{exp.location}</p>
-              <p className="font-sans text-sm text-white/60 leading-relaxed">{exp.description}</p>
+              <p className="font-mono text-[11px] text-white/35 mb-2 tracking-wide">{exp.location}</p>
+              <p className="font-mono text-xs text-white/50 leading-loose">{exp.description}</p>
               {exp.link && (
                 <a href={exp.link} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-3 px-4 py-2 border border-accent/50 text-accent font-mono text-xs tracking-wider hover:bg-accent hover:text-white hover:border-accent transition-all duration-200">

@@ -12,7 +12,7 @@ export default function Skills() {
             </span>
             <ul className="space-y-1.5">
               {group.items.map((item) => (
-                <li key={item} className="font-sans text-sm text-white/55 flex items-start gap-2">
+                <li key={item} className="font-mono text-xs text-white/50 flex items-start gap-2">
                   <span className="text-accent mt-0.5 shrink-0">—</span>
                   {item}
                 </li>

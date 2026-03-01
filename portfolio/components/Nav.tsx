@@ -34,21 +34,16 @@ export default function Nav() {
         <a href="#" className="font-serif text-lg font-medium tracking-wide text-ink hover:text-accent transition-colors">
           Y.S
         </a>
-
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {navItems.map((item) => (
             <a key={item.label} href={item.href}
-              className="font-mono text-xs tracking-widest uppercase text-muted hover:text-ink transition-colors hover-underline">
+              className="font-mono text-[10px] tracking-widest uppercase text-muted hover:text-ink transition-colors hover-underline">
               {item.label}
             </a>
           ))}
         </nav>
-
-        <button
-          className="md:hidden flex flex-col justify-center gap-1.5 p-2 -mr-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
+        <button className="md:hidden flex flex-col justify-center gap-1.5 p-2 -mr-2"
+          onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span className={`block w-6 h-px bg-ink transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
           <span className={`block w-6 h-px bg-ink transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
           <span className={`block w-6 h-px bg-ink transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
@@ -62,7 +57,7 @@ export default function Nav() {
           {navItems.map((item) => (
             <a key={item.label} href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="font-serif text-4xl font-light text-ink hover:text-accent transition-colors">
+              className="font-mono text-xl tracking-widest uppercase text-ink hover:text-accent transition-colors">
               {item.label}
             </a>
           ))}

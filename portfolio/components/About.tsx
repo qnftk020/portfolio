@@ -9,14 +9,14 @@ export default function About() {
           {[...education].reverse().map((edu, i) => (
             <div key={i} className="relative pl-5 pb-7 last:pb-0 border-l border-[#1F1F1D] group">
               <div className="absolute -left-[3px] top-1 w-[5px] h-[5px] rounded-full bg-[#1F1F1D] group-hover:bg-accent transition-colors" />
-              <span className="font-mono text-[11px] tracking-wider text-muted block mb-1.5">
+              <span className="font-mono text-[11px] tracking-wider text-muted block mb-2">
                 {edu.period}
               </span>
               <h3 className="font-serif text-xl sm:text-2xl font-medium text-ink leading-tight">
                 {edu.institution}
               </h3>
               {edu.degree && (
-                <p className="font-sans text-sm text-ink/50 mt-1">{edu.degree}</p>
+                <p className="font-mono text-xs text-ink/40 mt-1.5">{edu.degree}</p>
               )}
             </div>
           ))}
@@ -24,30 +24,27 @@ export default function About() {
 
         <div className="space-y-8">
           <div>
-            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-3">
+            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-4">
               Research Interest
             </span>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {researchInterests.map((focus) => (
                 <li key={focus} className="flex items-start gap-3">
                   <span className="font-mono text-accent text-sm mt-0.5">—</span>
-                  <span className="font-sans text-sm sm:text-base text-ink/70">{focus}</span>
+                  <span className="font-mono text-xs text-ink/60 leading-relaxed">{focus}</span>
                 </li>
               ))}
             </ul>
           </div>
-
           <div>
-            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-3">
-              Languages
-            </span>
+            <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-4">Languages</span>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="font-sans text-sm sm:text-base text-ink">Korean</span>
+                <span className="font-mono text-xs text-ink">Korean</span>
                 <span className="font-mono text-[11px] text-muted tracking-wider">Native</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="font-sans text-sm sm:text-base text-ink">English</span>
+                <span className="font-mono text-xs text-ink">English</span>
                 <span className="font-mono text-[11px] text-muted tracking-wider">Professional Working</span>
               </div>
             </div>

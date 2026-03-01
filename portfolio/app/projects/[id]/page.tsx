@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 
 const topicColors: Record<string, string> = {
   'Mixed Reality':      'bg-white/5 text-white/40',
-  'Media Art':          'bg-violet-500/10 text-violet-400',
+  'Media Art':          'bg-fuchsia-500/10 text-fuchsia-400',
   'Mobility Design':    'bg-red-500/10 text-red-400',
   'LLM':               'bg-orange-500/10 text-orange-400',
   'Multi-agent':        'bg-orange-500/10 text-orange-300',
@@ -28,10 +28,10 @@ const topicColors: Record<string, string> = {
   'Experiment Design':  'bg-purple-500/10 text-purple-400',
   'Game':              'bg-yellow-500/10 text-yellow-400',
   'Augmented Reality':  'bg-green-500/10 text-green-400',
-  'Service Design':     'bg-green-500/10 text-green-300',
+  'Service Design':     'bg-emerald-500/10 text-emerald-300',
   'Hackathon':          'bg-white/5 text-white/40',
   'Philosophy':         'bg-indigo-500/10 text-indigo-400',
-  'Virtual Reality':    'bg-cyan-500/10 text-cyan-400',
+  'Virtual Reality':    'bg-sky-500/10 text-sky-400',
 }
 
 const statusStyle: Record<string, { dot: string; label: string; badge: string }> = {
@@ -46,13 +46,13 @@ function Block({ block }: { block: ContentBlock }) {
       ? 'font-serif text-2xl sm:text-3xl font-light text-ink mt-9 mb-3'
       : block.level === 2
       ? 'font-serif text-xl sm:text-2xl font-light text-ink mt-7 mb-2'
-      : 'font-sans text-sm font-semibold text-ink/60 mt-5 mb-1 uppercase tracking-widest'
+      : 'font-mono text-[11px] font-medium text-ink/50 mt-5 mb-2 uppercase tracking-widest'
     return <h2 className={cls}>{block.text}</h2>
   }
 
   if (block.type === 'text') {
     return (
-      <p className="font-sans text-base sm:text-lg text-ink/65 leading-relaxed whitespace-pre-wrap">
+      <p className="font-mono text-xs sm:text-sm text-ink/55 leading-loose whitespace-pre-wrap">
         {block.text}
       </p>
     )
@@ -114,7 +114,6 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 
   const st = statusStyle[project.status] ?? statusStyle['Done']
 
-  // 썸네일(coverUrl)과 동일한 첫 번째 이미지는 본문에서 제거
   const contentBlocks = project.coverUrl
     ? (() => {
         let skipped = false
@@ -130,17 +129,16 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 
   return (
     <main className="min-h-screen bg-[#0C0C0B] text-ink">
-      {/* Top bar */}
       <div className="px-5 sm:px-8 md:px-12 py-5 border-b border-[#1F1F1D]">
         <Link href="/#projects"
-          className="inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-muted hover:text-ink transition-colors">
+          className="inline-flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-muted hover:text-ink transition-colors">
           <span>←</span><span>Back to Projects</span>
         </Link>
       </div>
 
       <div className="max-w-4xl mx-auto px-5 sm:px-8 md:px-12 py-14 sm:py-20">
         {/* Badges */}
-        <div className="flex flex-wrap items-center gap-2 mb-5">
+        <div className="flex flex-wrap items-center gap-2 mb-6">
           <span className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wide px-2 py-1 ${st.badge}`}>
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${st.dot}`} />
             {st.label}
@@ -153,16 +151,18 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* Title */}
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ink leading-tight mb-3">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ink leading-tight mb-5">
           {project.title}
         </h1>
-        <p className="font-mono text-xs text-muted mb-1">{project.year}</p>
+
+        {/* Year + Authors */}
+        <p className="font-mono text-sm text-ink/80 mb-2">{project.year}</p>
         {project.authors && (
-          <p className="font-mono text-xs text-muted mb-1">{project.authors}</p>
+          <p className="font-mono text-sm text-ink/60 leading-loose mb-4">{project.authors}</p>
         )}
         {project.paper && (
           <a href={project.paper} target="_blank" rel="noopener noreferrer"
-            className="inline-block font-mono text-xs text-accent/70 underline underline-offset-2 hover:text-accent mb-6">
+            className="inline-block font-mono text-xs text-accent/70 underline underline-offset-2 hover:text-accent mb-8">
             View Paper / Link →
           </a>
         )}
@@ -178,7 +178,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         <div className="border-t border-[#1F1F1D] pt-9 flex flex-col gap-7">
           {contentBlocks.length > 0
             ? contentBlocks.map((b, i) => <Block key={i} block={b} />)
-            : <p className="font-sans text-base text-muted">Content coming soon.</p>
+            : <p className="font-mono text-sm text-muted">Content coming soon.</p>
           }
         </div>
       </div>

@@ -25,7 +25,7 @@ function YearAccordion({ year, count, defaultOpen, children }: {
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 group" aria-expanded={open}>
         <div className="flex items-center gap-4">
           <span className="font-serif text-2xl sm:text-3xl font-light text-ink group-hover:text-accent transition-colors">{year}</span>
-          <span className="font-mono text-xs text-muted">{count} award{count > 1 ? 's' : ''}</span>
+          <span className="font-mono text-[10px] text-muted tracking-wide">{count} award{count > 1 ? 's' : ''}</span>
         </div>
         <span className={`font-mono text-muted text-xl transition-transform duration-200 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
@@ -47,10 +47,10 @@ export default function Awards() {
                   {award.year.slice(5)}
                 </span>
                 <div>
-                  <span className="font-serif text-base sm:text-lg font-medium text-ink block leading-tight group-hover:text-accent transition-colors">
+                  <span className="font-mono text-sm text-ink block leading-snug group-hover:text-accent transition-colors">
                     {award.title}
                   </span>
-                  <span className="font-sans text-sm text-ink/40 mt-0.5 block">{award.event}</span>
+                  <span className="font-mono text-[11px] text-ink/40 mt-1 block">{award.event}</span>
                 </div>
               </div>
             ))}
