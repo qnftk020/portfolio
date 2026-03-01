@@ -66,14 +66,18 @@ export default function Projects() {
     <section id="projects" className="py-14 sm:py-20 px-5 sm:px-8 md:px-12 max-w-6xl mx-auto">
       <h2 className="font-serif text-2xl sm:text-3xl font-light text-ink mb-8 sm:mb-12">Projects</h2>
       <div className="mb-4">
-        <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-4">Featured</span>
+        <div className="flex items-center gap-3 mb-5">
+          <span className="font-mono text-xs tracking-widest uppercase text-ink/60 border-l-2 border-accent pl-3">Featured</span>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {featuredProjects.map(p => <ProjectCard key={p.slug} project={p} />)}
         </div>
       </div>
       <hr className="border-[#1F1F1D] my-7 sm:my-9" />
       <div>
-        <span className="font-mono text-[11px] tracking-widest uppercase text-muted block mb-4">All</span>
+        <div className="flex items-center gap-3 mb-5">
+          <span className="font-mono text-xs tracking-widest uppercase text-ink/60 border-l-2 border-accent pl-3">All</span>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {onlyAll.map(p => <ProjectCard key={p.slug} project={p} />)}
         </div>

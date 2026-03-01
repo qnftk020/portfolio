@@ -20,9 +20,9 @@ export default function Experience() {
             </div>
             <div>
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-1.5">
-                <h3 className="font-serif text-lg sm:text-xl font-medium text-white leading-tight">{exp.role}</h3>
+                <h3 className="font-mono text-sm sm:text-base font-medium text-white leading-tight">{exp.role}</h3>
                 <span className="font-mono text-xs text-white/30">@</span>
-                <span className="font-serif text-lg sm:text-xl italic font-bold text-accent/70 leading-tight">{exp.org}</span>
+                <span className="font-mono text-sm sm:text-base font-bold text-accent/70 leading-tight">{exp.org}</span>
               </div>
               <p className="font-mono text-[11px] text-white/35 mb-2 tracking-wide">{exp.location}</p>
               <p className="font-mono text-xs text-white/50 leading-loose">{exp.description}</p>

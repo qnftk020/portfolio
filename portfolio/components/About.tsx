@@ -12,7 +12,7 @@ export default function About() {
               <span className="font-mono text-[11px] tracking-wider text-muted block mb-2">
                 {edu.period}
               </span>
-              <h3 className="font-serif text-xl sm:text-2xl font-medium text-ink leading-tight">
+              <h3 className="font-mono text-base sm:text-lg font-medium text-ink leading-tight">
                 {edu.institution}
               </h3>
               {edu.degree && (

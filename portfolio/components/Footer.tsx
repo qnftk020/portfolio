@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
           <div>
-            <span className="font-serif text-2xl font-light text-ink">{profile.name}</span>
+            <span className="font-mono text-base font-medium text-ink">{profile.name}</span>
             <p className="font-mono text-xs text-muted mt-1">{profile.tagline}</p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">

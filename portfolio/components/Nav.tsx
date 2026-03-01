@@ -31,7 +31,7 @@ export default function Nav() {
       scrolled ? 'bg-[#0C0C0B]/95 backdrop-blur-sm border-b border-[#1F1F1D]' : 'bg-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 h-14 sm:h-16 flex items-center justify-between">
-        <a href="#" className="font-serif text-lg font-medium tracking-wide text-ink hover:text-accent transition-colors">
+        <a href="#" className="font-mono text-sm font-medium tracking-widest text-ink hover:text-accent transition-colors">
           Y.S
         </a>
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
